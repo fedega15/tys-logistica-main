@@ -1,0 +1,7 @@
+POST http://webports.duckdns.org:5000/login
+Content-Type: application/json
+
+{
+    "usuario": "gustavo",
+    "password": "1212"
+}
