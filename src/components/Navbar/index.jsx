@@ -10,7 +10,7 @@ import {BsPlusSquareFill } from "react-icons/bs"
 const Navbar1 = () => {
   return (
     <>
-      {[false, ].map((expand) => (
+      {[false,].map((expand) => (
         <Navbar key={expand} bg="light"  expand={expand} >
           <Container fluid style={{ height:"70px"}}>
 
