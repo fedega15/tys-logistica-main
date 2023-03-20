@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 function Title() {
   const location = useLocation()
-  console.log(location)
+ 
   return (
     <Container fluid className='bg-secondary bg-gradient text-white ' 
       style= {{display:'flex', justifyContent:'center', height: '60px', fontSize: '1.6rem', color:"white", background:"gray"}} >

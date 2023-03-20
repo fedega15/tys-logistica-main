@@ -1,4 +1,5 @@
 import {AxiosError} from 'axios'
+
 export const handleFetchError = (error) => {
     let strError = 'Algo salio mal'
     if(error instanceof AxiosError){

@@ -1,10 +1,10 @@
 import { useForm } from "../../hooks/useForm"
 import { UserLogin } from "../../api/Model/Login"
+
 const initialForm = {
     email: "",
     password: "",
 }
-
 const vaildateForm = (form) => {
     let errors = {}
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -52,7 +52,6 @@ const ContactForm = () => {
         }
     }
 
-
     return (
         <div className='container'>
             <div className="container ">
@@ -70,7 +69,7 @@ const ContactForm = () => {
                                     onBlur={handleBlur}
                                     value={form.email}
                                 />
-                                {errors.email && <p>{errors.email}</p>}
+                                {errors.email && <p className='text-danger'>{errors.email}</p>}
                             </div>
                         </div>
                         <div className="row">
@@ -84,7 +83,7 @@ const ContactForm = () => {
                                     onBlur={handleBlur}
                                     value={form.password}
                                 />
-                                {errors.password && <p>{errors.password}</p>}
+                                {errors.password && <p  className='text-danger' >{errors.password}</p>}
                             </div>
                         </div>
                         <br />

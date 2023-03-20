@@ -7,7 +7,7 @@ export const useForm = (initialForm, validateForm) => {
     const [response, setResponse] = useState(null)
 
     const handleChange =(e)=> {
-        const  {name, value} = e.target
+        const {name, value} = e.target
 
        setForm ({
           ...form,
@@ -21,7 +21,17 @@ export const useForm = (initialForm, validateForm) => {
         setErrors(validateForm(form));
     }
 
-    const handleSubmit= (e) => {}
+    const handleSubmit= (e) => {
+        e.preventDefault()  
+        setErrors(validateForm(form)); // SI NO HAY ERRORES EN EL STADO ERRORS...
+
+        if (Object.keys(errors).length === 0) {
+            alert("enviando formulario")
+
+        }else {
+            return
+        }
+    }
 
     return {
         form,
