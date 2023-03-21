@@ -1,5 +1,6 @@
 import { useForm } from "../../hooks/useForm"
 import { UserLogin } from "../../api/Model/Login"
+import { useState, useEffect } from "react"
 
 const initialForm = {
     email: "",
@@ -23,15 +24,16 @@ const vaildateForm = (form) => {
     return errors
 }
 const ContactForm = () => {
+    const [Loading, setLoading] = useState (false)
     const {
         form,
         errors,
-        loading,
         response,
         handleChange,
         handleBlur,
         handleSubmit,
     } = useForm(initialForm, vaildateForm)
+    
 
     const handleFetch = async (e) => {
         try {
@@ -42,15 +44,23 @@ const ContactForm = () => {
                 console.log(errors)
                 return false
             }
-            const api_response = await UserLogin(initialForm)
+            
+            console.log(form)
+            const api_response = await UserLogin(form)
+            console.log(errors.response.data)
             if (api_response.status === 200) {
                 const { data } = api_response
                 console.log(data)
             }
         } catch (error) {
+            console.log(error.response.data)
             console.log(error)
         }
     }
+    useEffect (() => {
+        handleFetch()
+      },[])
+      if(Loading){return (<>Loading..</>)}
 
     return (
         <div className='container'>
