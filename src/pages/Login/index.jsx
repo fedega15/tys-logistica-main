@@ -1,5 +1,5 @@
 import { useForm } from "../../hooks/useForm"
-import { UserLogin } from "../../api/Model/Login"
+import { UserLogin } from "../../api/Model/User"
 import { useState, useEffect } from "react"
 
 const initialForm = {
@@ -44,10 +44,11 @@ const ContactForm = () => {
                 console.log(errors)
                 return false
             }
-            
             console.log(form)
+            //faltaba poner parametro donde se crea la func
             const api_response = await UserLogin(form)
-            console.log(errors.response.data)
+            //esto no se puede imprimir porque aca no hay error
+            //console.log(errors.response.data)
             if (api_response.status === 200) {
                 const { data } = api_response
                 console.log(data)
@@ -57,9 +58,9 @@ const ContactForm = () => {
             console.log(error)
         }
     }
-    useEffect (() => {
+    /*useEffect (() => {
         handleFetch()
-      },[])
+      },[])*/
       if(Loading){return (<>Loading..</>)}
 
     return (

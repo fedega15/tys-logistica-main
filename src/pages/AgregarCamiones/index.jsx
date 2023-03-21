@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from '../../hooks/useForm'
-import { AgregarCamion } from '../../api/Model/Agregar'
+import { AgregarCamion } from '../../api/Model/Vehicle'
 
 const initialForm = {
     patente: "",
