@@ -4,11 +4,12 @@ import { useForm } from '../../hooks/useForm'
 import { AgregarCamion } from '../../api/Model/Vehicle'
 
 const initialForm = {
-    patente: "",
-    numChasis:"",
-    numMotor:"",
-    numMovil:"",
-    tipo:"",
+  tipo: "",
+  patente: "",
+  numChasis:"",
+  numMotor:"",
+  numMovil:"",
+  id: "",
 }
 
 const vaildateForm = (form) => {
@@ -31,7 +32,7 @@ const vaildateForm = (form) => {
   }
   if (!form.numMovil.trim()) {
     errors.numMovil = "el numero de movil es requerido"
-  } else if (String(form.numMovil).trim().length < 5) {
+  } else if ((form.numMovil).trim().length < 5) {
     errors.numMovil = "El campo debe ser mayor 5 caracteres"
   }
   return errors
@@ -61,18 +62,18 @@ const handleFetch = async (e) => {
           console.log(errors)
           return false
       }
-      const api_response = await AgregarCamion(initialForm)
+      const api_response = await AgregarCamion(form)
+     
       if (api_response.status === 200) {
           const { data } = api_response
           console.log(data)
       }
   } catch (error) {
+    console.log(form)
+    console.log(error.response.data)
       console.log(error)
   }
 }
-
-
-
   return (
     <div className="container">
 
@@ -119,6 +120,7 @@ const handleFetch = async (e) => {
           {errors.numMotor && <p className='text-danger'>{errors.numMotor}</p>}
           </div>
           <div className="form-group col-md-6 mb-3">
+            
             <label htmlFor="email">Numero movil</label>
             <input 
              type='text'
@@ -136,13 +138,16 @@ const handleFetch = async (e) => {
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="country">Tipo</label>
               <select 
+                type="number"
                 className="custom-select d-block w-100" 
                 id="tipo" 
-                name="tipo">
+                name="tipo"
+                onChange={handleChange}
+                value={form.tipo}>
                 <option value="">Opciones...</option>
-                <option value="1">Camion</option>
-                <option value="2">Acoplado</option>
-                <option value="3">Camion + Acoplado</option>
+                <option value={1}>Camion</option>
+                <option value={2}>Acoplado</option>
+                <option value={3}>Camion + Acoplado</option>
               </select>
             </div>
 
@@ -150,16 +155,19 @@ const handleFetch = async (e) => {
               <label htmlFor="state">Id</label>
               <select 
                 className="custom-select d-block w-100" 
-                id="state" 
-                name="state">
+                type="number"
+                id="id" 
+                name="id"
+                onChange={handleChange}
+                value={form.id}>
                 <option value="">Opciones...</option>
-                <option value="lagos">1</option>
-                <option value="east legion">2 </option>
-                <option value="cape town">3</option>
+                <option value={1}>1</option>
+                <option value={2}>2 </option>
+                <option value={3}>3</option>
               </select>
             </div>
           </div>
-          <button className="btn btn-secondary btn-lg btn-block" type="submit" > "Enviar"</button>
+          <button className="btn btn-secondary btn-lg btn-block" onClick={handleFetch} > Enviar </button>
         </form>
       </div>
 

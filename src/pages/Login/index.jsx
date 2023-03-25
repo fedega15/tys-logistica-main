@@ -1,6 +1,7 @@
 import { useForm } from "../../hooks/useForm"
 import { UserLogin } from "../../api/Model/User"
-import { useState, useEffect } from "react"
+import { useState, useContext } from "react"
+import AuthContext from "../../context/AuthProvider"
 
 const initialForm = {
     email: "",
@@ -24,6 +25,7 @@ const vaildateForm = (form) => {
     return errors
 }
 const ContactForm = () => {
+    const { setAuth } = useContext(AuthContext)
     const [Loading, setLoading] = useState (false)
     const {
         form,

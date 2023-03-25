@@ -8,10 +8,9 @@ export const useForm = (initialForm, validateForm) => {
 
     const handleChange =(e)=> {
         const {name, value} = e.target
-
        setForm ({
           ...form,
-           [name]:value,
+           [name]: isNaN (value) ? value : Number(value)
         })
    }
 

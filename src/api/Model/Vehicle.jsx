@@ -4,6 +4,7 @@ import { urlGetVehicles,urlAgregar } from "../URLS/urls";
 export const getVehicles = async () => {
     return await customAxios.get(urlGetVehicles)
 }
-export const AgregarCamion = async () => {
-    return await customAxios.post(urlAgregar)
+export const AgregarCamion = async (vehicleInfo) => {
+    console.log(vehicleInfo)
+    return await customAxios.post(urlAgregar, vehicleInfo)
 }
