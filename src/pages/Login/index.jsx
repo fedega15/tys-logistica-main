@@ -3,6 +3,8 @@ import { UserLogin } from "../../api/Model/User"
 import { useState, useContext } from "react"
 import AuthContext from "../../context/AuthProvider"
 
+
+
 const initialForm = {
     email: "",
     password: "",
@@ -27,6 +29,7 @@ const vaildateForm = (form) => {
 const ContactForm = () => {
     const { setAuth } = useContext(AuthContext)
     const [Loading, setLoading] = useState (false)
+    const [success, setSucces] = useState(false)
     const {
         form,
         errors,
@@ -39,9 +42,40 @@ const ContactForm = () => {
 
     const handleFetch = async (e) => {
         try {
-            e.preventDefault()
-            if (errors.hasOwnProperty('email')
-                ||errors.hasOwnProperty('password')) {
+          e.preventDefault()
+          if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
+            console.log(errors)
+            return false
+          }
+          console.log(form)
+          const api_response = await UserLogin(form)
+          if (api_response.status === 200) {
+            const { data } = api_response
+            console.log(data)
+            const accessToken = api_response?.data?.accessToken;
+            setAuth((prevAuth) => ({
+              ...prevAuth,
+              email: form.email,
+              password: form.password,
+              accessToken: accessToken,
+            }))
+            // setForm({ email: '', password: '' }) PREGUNTAR A FEDE
+            setSucces(true)
+          }
+        } catch (error) {
+          console.log(error.response?.data || error.message)
+          console.log(error)
+        } finally {
+          setLoading(false)
+        }
+      }
+      /*
+    const handleFetch = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        
+        try {
+            if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
                 //hay errores
                 console.log(errors)
                 return false
@@ -49,23 +83,38 @@ const ContactForm = () => {
             console.log(form)
             //faltaba poner parametro donde se crea la func
             const api_response = await UserLogin(form)
-            //esto no se puede imprimir porque aca no hay error
-            //console.log(errors.response.data)
             if (api_response.status === 200) {
                 const { data } = api_response
                 console.log(data)
+                const accessToken = api_response?.data?.accessToken;
+                setAuth({ email : form.email, password: form.password , accessToken}) // preguntar a fede como paso las props email y password aca.
+                setSucces(true)
             }
         } catch (error) {
             console.log(error.response.data)
             console.log(error)
         }
+        finally {
+            setLoading(false)
+          }
     }
     /*useEffect (() => {
         handleFetch()
       },[])*/
+
       if(Loading){return (<>Loading..</>)}
 
     return (
+        <>
+        {success ? (
+            <section>
+                <h1>Inicio de sesion existoso</h1>
+                <br />
+                <p>
+                    <a href="#">ya tienes acceso a la web..</a>
+                </p>
+            </section>
+        ):(
         <div className='container'>
             <div className="container ">
                 <div className="col-md-11 mt-5">
@@ -109,6 +158,8 @@ const ContactForm = () => {
                 </div>
             </div>
         </div>
+        )}
+        </>
     )
 }
 

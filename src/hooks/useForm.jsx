@@ -6,13 +6,24 @@ export const useForm = (initialForm, validateForm) => {
     const [loading, setLoading] = useState(false)
     const [response, setResponse] = useState(null)
 
-    const handleChange =(e)=> {
-        const {name, value} = e.target
-       setForm ({
-          ...form,
-           [name]: isNaN (value) ? value : Number(value)
-        })
-   }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const newValue = value.trim() === '' ? '' : isNaN(value) ? value : Number(value);
+        setForm((prevForm) => ({
+          ...prevForm,
+          [name]: newValue,
+        }));
+      };
+   /*
+  const handleChange = (e) => {
+  const { name, value } = e.target;
+  const newValue = e.target.type === 'number' ? parseInt(value) : value;
+  setForm((prevForm) => ({
+    ...prevForm,
+    [name]: newValue,
+  }));
+};
+  */
 
     const handleBlur = (e) => {
         handleChange(e);

@@ -31,7 +31,7 @@ const vaildateForm = (form) => {
     errors.numChasis = "El campo debe ser mayor 5 caracteres"
   }
   if (!form.numMovil.trim()) {
-    errors.numMovil = "el numero de movil es requerido"
+    errors.numMovil = "el numero de movil es requerido" // este debe ser un numero acomodar preg a fede.
   } else if ((form.numMovil).trim().length < 5) {
     errors.numMovil = "El campo debe ser mayor 5 caracteres"
   }
@@ -69,7 +69,6 @@ const handleFetch = async (e) => {
           console.log(data)
       }
   } catch (error) {
-    console.log(form)
     console.log(error.response.data)
       console.log(error)
   }
