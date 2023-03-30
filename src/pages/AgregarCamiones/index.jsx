@@ -69,8 +69,7 @@ const handleFetch = async (e) => {
           console.log(data)
       }
   } catch (error) {
-    console.log(error.response.data)
-      console.log(error)
+          console.log(error)
   }
 }
   return (
@@ -166,7 +165,11 @@ const handleFetch = async (e) => {
               </select>
             </div>
           </div>
-          <button className="btn btn-secondary btn-lg btn-block" onClick={handleFetch} > Enviar </button>
+          <div className="form-group">
+                            <button onClick={handleFetch}>
+                                Enviar
+                            </button>
+                        </div>
         </form>
       </div>
 

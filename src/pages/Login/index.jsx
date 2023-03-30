@@ -1,10 +1,9 @@
 import { useForm } from "../../hooks/useForm"
 import { UserLogin } from "../../api/Model/User"
-import { useState, useContext } from "react"
-import AuthContext from "../../context/AuthProvider"
-
-
-
+import { useState } from "react"
+import useAuth from "../../hooks/useAuth"
+import {Link, useNavigate, useLocation } from "react-router-dom"
+ 
 const initialForm = {
     email: "",
     password: "",
@@ -27,18 +26,20 @@ const vaildateForm = (form) => {
     return errors
 }
 const ContactForm = () => {
-    const { setAuth } = useContext(AuthContext)
+    const { setAuth } = useAuth() // aca uso el hook y remplazo useContext(AuthContext) global auth
+    const  navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/"
+
     const [Loading, setLoading] = useState (false)
-    const [success, setSucces] = useState(false)
     const {
         form,
         errors,
-        response,
         handleChange,
         handleBlur,
         handleSubmit,
     } = useForm(initialForm, vaildateForm)
-    
+                // VALIDO EL FORM CON EL USEFORM Y VALIDATEFORM. SI HAY ERRORES EN EL FORM, LA F SE DETIENE.
 
     const handleFetch = async (e) => {
         try {
@@ -48,7 +49,10 @@ const ContactForm = () => {
             return false
           }
           console.log(form)
-          const api_response = await UserLogin(form)
+          const api_response = await UserLogin(form) 
+                                                 //USERLOGIN SI EL FORM ES VALIDO EJECUTA UNA SOLICITUD DE INCIIO DE SESION
+                                                 // SI ES EXITOSA Y RECIBE UN TOKEN , UTILIZO LA F SETAUTH PARA ACTUALIZAR 
+                                                 // EL CONTEXTO DE AUT CON EL CORREO PASS Y TOKEN,  
           if (api_response.status === 200) {
             const { data } = api_response
             console.log(data)
@@ -60,7 +64,7 @@ const ContactForm = () => {
               accessToken: accessToken,
             }))
             // setForm({ email: '', password: '' }) PREGUNTAR A FEDE
-            setSucces(true)
+            navigate(from, {replace: true}) //USO NAVIGATE  PARA REDIRIGIR AL USUARIO A LA RAIZ DEL SITIO, PREG A FEDE SI ACA FLASHIE
           }
         } catch (error) {
           console.log(error.response?.data || error.message)
@@ -104,17 +108,8 @@ const ContactForm = () => {
 
       if(Loading){return (<>Loading..</>)}
 
+      // preg a fede si elimino el handlesubmit
     return (
-        <>
-        {success ? (
-            <section>
-                <h1>Inicio de sesion existoso</h1>
-                <br />
-                <p>
-                    <a href="#">ya tienes acceso a la web..</a>
-                </p>
-            </section>
-        ):(
         <div className='container'>
             <div className="container ">
                 <div className="col-md-11 mt-5">
@@ -158,8 +153,6 @@ const ContactForm = () => {
                 </div>
             </div>
         </div>
-        )}
-        </>
     )
 }
 

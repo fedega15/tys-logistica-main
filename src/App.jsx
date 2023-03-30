@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import AgregarCamiones from "./pages/AgregarCamiones";
 import Titulo from "./components/Titulo";
 import ListaCamiones from "./pages/ListaCamiones";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
@@ -12,21 +13,15 @@ function App() {
       <BrowserRouter>
             <Navbar/>
             <Breadcrumbs />
-            
             <Titulo/>
-          <Routes>
-            <Route 
-              path="/"
-              element={<ListaCamiones/>} />
-
-              <Route 
-              path="/login"
-              element={<Login/>}  />
-
-              <Route 
-              path="/AgregarCamiones"
-              element={<AgregarCamiones/>}  />
-          </Routes>
+ 
+          <Routes>  
+             <Route path="/login" element={<Login/>}/>
+              <Route  path="/" element={<ListaCamiones/>}/>
+              <Route path="/AgregarCamiones"element={<AgregarCamiones/>}/> 
+              <Route element={<RequireAuth/>} > //si uso este route para envolver las rutas lista y agregar no las puedo ver las priba...
+            </Route>
+          </Routes> 
         
       
       </BrowserRouter>
