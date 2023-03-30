@@ -4,12 +4,12 @@ import { customAxiosPrivate } from "../api/axiosInstanse";
 import { useEffect  } from "react";
 import useAuth from "./useAuth";
 
-const useCustomAxiosPrivate = () => {
-    const { auth } = useAuth();
+const useCustomAxiosPrivate = () => { // uso para realizar peticiones  http autenticadas
+    const { auth } = useAuth(); // me da la info de de la autenticacion
     
     useEffect(() => {
 
-        const requestInterceptors = customAxiosPrivate.interceptors.response.use(
+        const requestInterceptors = customAxiosPrivate.interceptors.response.use( //este interceptor se ocupa de q haya un token en los headers de la peticion
             config => {
                 if (!config.headers['Authorization']) {
                     config.headers['Authorization'] = `Bearer ${auth?.AccesToken}`
@@ -18,7 +18,7 @@ const useCustomAxiosPrivate = () => {
             }, (error) => Promise.reject(error)
         )
 
-        const responseInterceptors = customAxiosPrivate.response.use(
+        const responseInterceptors = customAxiosPrivate.response.use( // este interceptor se encarga de manejar los errores
             response => response,
             async (error) => {
                 const prevRequest = error?.config;

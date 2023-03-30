@@ -13,6 +13,6 @@ const RequireAuth = () => {
         ? <Outlet/> // EL COMPONENTE OUTLET PERMITE EL ACCESO A LAS RUTAS PROTEGIDAS. MOSTRANDO EL CONT DE LA RUTA ACTUAL
         : <Navigate to="/login" state={{form: location}} replace /> // NAVIGATE SI NO ESTA AUTENTICADO LO REDIRIGE AL 
                                                                     //INCIO DE SESION, ESTA ALMACENA EN UN STATE PARA ALMACENAR LA UBI ACTUAL
-}
+)}
 
 export default RequireAuth
