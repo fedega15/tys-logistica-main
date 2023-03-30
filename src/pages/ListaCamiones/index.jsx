@@ -14,6 +14,8 @@ const  ListaCamiones1 = () => {
     setLoading(true)
   try {
       const api_response = await getVehicles()
+      console.log(`Respuesta`)
+      console.log(api_response.data)
       if(api_response.status === 200){
         const {data} = api_response 
         setVehicles(data)  
@@ -22,6 +24,7 @@ const  ListaCamiones1 = () => {
       }
       
     } catch (error) {
+      console.log(error.response.data.msj)
       const strError = handleFetchError(error)
       setError (strError)
     } 

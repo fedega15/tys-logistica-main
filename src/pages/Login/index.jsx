@@ -2,8 +2,8 @@ import { useForm } from "../../hooks/useForm"
 import { UserLogin } from "../../api/Model/User"
 import { useState } from "react"
 import useAuth from "../../hooks/useAuth"
-import {Link, useNavigate, useLocation } from "react-router-dom"
- 
+import { Link, useNavigate, useLocation } from "react-router-dom"
+
 const initialForm = {
     email: "",
     password: "",
@@ -27,11 +27,11 @@ const vaildateForm = (form) => {
 }
 const ContactForm = () => {
     const { setAuth } = useAuth() // aca uso el hook y remplazo useContext(AuthContext) global auth
-    const  navigate = useNavigate()
+    const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || "/"
 
-    const [Loading, setLoading] = useState (false)
+    const [Loading, setLoading] = useState(false)
     const {
         form,
         errors,
@@ -39,76 +39,76 @@ const ContactForm = () => {
         handleBlur,
         handleSubmit,
     } = useForm(initialForm, vaildateForm)
-                // VALIDO EL FORM CON EL USEFORM Y VALIDATEFORM. SI HAY ERRORES EN EL FORM, LA F SE DETIENE.
+    // VALIDO EL FORM CON EL USEFORM Y VALIDATEFORM. SI HAY ERRORES EN EL FORM, LA F SE DETIENE.
 
     const handleFetch = async (e) => {
         try {
-          e.preventDefault()
-          if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
-            console.log(errors)
-            return false
-          }
-          console.log(form)
-          const api_response = await UserLogin(form) 
-                                                 //USERLOGIN SI EL FORM ES VALIDO EJECUTA UNA SOLICITUD DE INCIIO DE SESION
-                                                 // SI ES EXITOSA Y RECIBE UN TOKEN , UTILIZO LA F SETAUTH PARA ACTUALIZAR 
-                                                 // EL CONTEXTO DE AUT CON EL CORREO PASS Y TOKEN,  
-          if (api_response.status === 200) {
-            const { data } = api_response
-            console.log(data)
-            const accessToken = api_response?.data?.accessToken;
-            setAuth((prevAuth) => ({
-              ...prevAuth,
-              email: form.email,
-              password: form.password,
-              accessToken: accessToken,
-            }))
-            // setForm({ email: '', password: '' }) PREGUNTAR A FEDE
-            navigate(from, {replace: true}) //USO NAVIGATE  PARA REDIRIGIR AL USUARIO A LA RAIZ DEL SITIO, PREG A FEDE SI ACA FLASHIE
-          }
-        } catch (error) {
-          console.log(error.response?.data || error.message)
-          console.log(error)
-        } finally {
-          setLoading(false)
-        }
-      }
-      /*
-    const handleFetch = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        
-        try {
+            e.preventDefault()
             if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
-                //hay errores
                 console.log(errors)
                 return false
             }
             console.log(form)
-            //faltaba poner parametro donde se crea la func
             const api_response = await UserLogin(form)
+            //USERLOGIN SI EL FORM ES VALIDO EJECUTA UNA SOLICITUD DE INCIIO DE SESION
+            // SI ES EXITOSA Y RECIBE UN TOKEN , UTILIZO LA F SETAUTH PARA ACTUALIZAR 
+            // EL CONTEXTO DE AUT CON EL CORREO PASS Y TOKEN,  
             if (api_response.status === 200) {
                 const { data } = api_response
-                console.log(data)
                 const accessToken = api_response?.data?.accessToken;
-                setAuth({ email : form.email, password: form.password , accessToken}) // preguntar a fede como paso las props email y password aca.
-                setSucces(true)
+                setAuth((prevAuth) => ({
+                    ...prevAuth,
+                    email: form.email,
+                    password: form.password,
+                    accessToken: accessToken,
+                    auth: true
+                }))
+                // setForm({ email: '', password: '' }) PREGUNTAR A FEDE
+                navigate('/') //USO NAVIGATE  PARA REDIRIGIR AL USUARIO A LA RAIZ DEL SITIO, PREG A FEDE SI ACA FLASHIE
             }
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error.response?.data || error.message)
             console.log(error)
-        }
-        finally {
+        } finally {
             setLoading(false)
-          }
+        }
     }
-    /*useEffect (() => {
-        handleFetch()
-      },[])*/
+    /*
+  const handleFetch = async (e) => {
+      e.preventDefault()
+      setLoading(true)
+      
+      try {
+          if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
+              //hay errores
+              console.log(errors)
+              return false
+          }
+          console.log(form)
+          //faltaba poner parametro donde se crea la func
+          const api_response = await UserLogin(form)
+          if (api_response.status === 200) {
+              const { data } = api_response
+              console.log(data)
+              const accessToken = api_response?.data?.accessToken;
+              setAuth({ email : form.email, password: form.password , accessToken}) // preguntar a fede como paso las props email y password aca.
+              setSucces(true)
+          }
+      } catch (error) {
+          console.log(error.response.data)
+          console.log(error)
+      }
+      finally {
+          setLoading(false)
+        }
+  }
+  /*useEffect (() => {
+      handleFetch()
+    },[])*/
 
-      if(Loading){return (<>Loading..</>)}
+    if (Loading) { return (<>Loading..</>) }
 
-      // preg a fede si elimino el handlesubmit
+    // preg a fede si elimino el handlesubmit
     return (
         <div className='container'>
             <div className="container ">
@@ -140,7 +140,7 @@ const ContactForm = () => {
                                     onBlur={handleBlur}
                                     value={form.password}
                                 />
-                                {errors.password && <p  className='text-danger' >{errors.password}</p>}
+                                {errors.password && <p className='text-danger' >{errors.password}</p>}
                             </div>
                         </div>
                         <br />

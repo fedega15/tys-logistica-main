@@ -1,7 +1,7 @@
-import { customAxios } from "../axiosInstanse";
+import customAxiosPrivate from '../axiosInstanse'
 import { urlLogin } from '../URLS/urls'
 
 export const UserLogin = async (userInfo) => {
-        console.log(userInfo)
-        return await customAxios.post(urlLogin,userInfo)
+        //console.log(userInfo)
+        return await customAxiosPrivate.post(urlLogin,userInfo)
 }
