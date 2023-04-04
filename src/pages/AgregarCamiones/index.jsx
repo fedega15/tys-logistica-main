@@ -30,9 +30,9 @@ const vaildateForm = (form) => {
   } else if (String(form.numChasis).trim().length < 5) {
     errors.numChasis = "El campo debe ser mayor 5 caracteres"
   }
-  if (!form.numMovil.trim()) {
+  if (!form.numMovil) {
     errors.numMovil = "el numero de movil es requerido" // este debe ser un numero acomodar preg a fede.
-  } else if ((form.numMovil).trim().length < 5) {
+  } else if ((form.numMovil).length < 5) {
     errors.numMovil = "El campo debe ser mayor 5 caracteres"
   }
   return errors
@@ -121,7 +121,7 @@ const handleFetch = async (e) => {
             
             <label htmlFor="email">Numero movil</label>
             <input 
-             type='text'
+             type='number'
              name="numMovil"
              placeholder="123123qwdas"
              onChange={handleChange}

@@ -30,7 +30,6 @@ const ContactForm = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || "/"
-
     const [Loading, setLoading] = useState(false)
     const {
         form,
@@ -40,7 +39,6 @@ const ContactForm = () => {
         handleSubmit,
     } = useForm(initialForm, vaildateForm)
     // VALIDO EL FORM CON EL USEFORM Y VALIDATEFORM. SI HAY ERRORES EN EL FORM, LA F SE DETIENE.
-
     const handleFetch = async (e) => {
         try {
             e.preventDefault()
@@ -50,9 +48,6 @@ const ContactForm = () => {
             }
             console.log(form)
             const api_response = await UserLogin(form)
-            //USERLOGIN SI EL FORM ES VALIDO EJECUTA UNA SOLICITUD DE INCIIO DE SESION
-            // SI ES EXITOSA Y RECIBE UN TOKEN , UTILIZO LA F SETAUTH PARA ACTUALIZAR 
-            // EL CONTEXTO DE AUT CON EL CORREO PASS Y TOKEN,  
             if (api_response.status === 200) {
                 const { data } = api_response
                 const accessToken = api_response?.data?.accessToken;
