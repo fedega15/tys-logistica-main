@@ -46,11 +46,11 @@ const ContactForm = () => {
                 console.log(errors)
                 return false
             }
-            console.log(form)
             const api_response = await UserLogin(form)
             if (api_response.status === 200) {
-                const { data } = api_response
+                console.log(1)
                 const accessToken = api_response?.data?.accessToken;
+                console.log(accessToken)
                 setAuth((prevAuth) => ({
                     ...prevAuth,
                     email: form.email,

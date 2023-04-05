@@ -2,7 +2,13 @@ import { createContext, useState } from "react";
 
 const AuthContext = createContext({})
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({})
+    const [auth, setAuth] = useState({
+        email: null,
+        password: null,
+        accessToken: null,
+        auth: false
+    })
+    console.log(auth)
     // aca estoy obteniendo email password y token q me da como response
     // la api si los datos que yo le envie en el get (login) fueron correctos. 
     return (
