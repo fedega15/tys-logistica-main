@@ -2,6 +2,8 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from '../../hooks/useForm'
 import { AgregarCamion } from '../../api/Model/Vehicle'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const initialForm = {
   tipo: "",
@@ -42,34 +44,40 @@ const AgregarCamiones = () => {
   const {
     form,
     errors,
-    loading,
-    response,
     handleChange,
     handleBlur, 
     handleSubmit,
 } = useForm(initialForm, vaildateForm)
+
+const [sending, setSending] = useState(false);
+const [sent, setSent] = useState(false);
   
 const handleFetch = async (e) => {
   try {
       e.preventDefault()
-      if (errors.hasOwnProperty('email')
-          ||errors.hasOwnProperty('password')
-          ||errors.hasOwnProperty('password')
-          ||errors.hasOwnProperty('password')
-          ||errors.hasOwnProperty('password')
-          ||errors.hasOwnProperty('password')){
+      if (errors.hasOwnProperty('patente')
+          ||errors.hasOwnProperty('NumChasis')
+          ||errors.hasOwnProperty('NumMotor')
+          ||errors.hasOwnProperty('NumMovil')
+         ){
           //hay errores
           console.log(errors)
           return false
       }
+      setSending(true);
       const api_response = await AgregarCamion(form)
+      setSending(false)
      
       if (api_response.status === 200) {
           const { data } = api_response
           console.log(data)
+          
       }
+      setSending(false);
+      setSent(true);
   } catch (error) {
           console.log(error)
+          setSending(false)
   }
 }
   return (
@@ -166,10 +174,12 @@ const handleFetch = async (e) => {
             </div>
           </div>
           <div className="form-group">
-                            <button onClick={handleFetch}>
-                                Enviar
-                            </button>
-                        </div>
+          <button onClick={handleFetch} disabled={sending || sent  } >
+          {sending ? "Enviando..." : sent ? "Enviado" : "Enviar"}
+              {sent ? <span>&#10003;</span> : ""}
+          </button>
+          </div>
+             {sent && <p className="text-success"> Tu vehiculo se añadio a :<Link className="fw-bolder border-bottom border-secondary p-2 pb-4" to="/">Lista camiones</Link></p>}
         </form>
       </div>
 
