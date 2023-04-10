@@ -6,6 +6,7 @@ import logopng from "./logo.png"
 import {RiLoginBoxFill } from "react-icons/ri"
 import {FaListAlt } from "react-icons/fa"
 import {BsPlusSquareFill } from "react-icons/bs"
+import {BsFillPersonPlusFill } from "react-icons/bs"
 
 const Navbar1 = () => {
   return (
@@ -35,6 +36,7 @@ const Navbar1 = () => {
                   <Nav.Link className="fw-bolder border-bottom border-secondary border-top p-2 pb-4 " href="/login"> <RiLoginBoxFill/> Inicia sesion</Nav.Link>
                   <Nav.Link className="fw-bolder border-bottom border-secondary p-2 pb-4" href="/"> <FaListAlt/> Lista camiones</Nav.Link>
                   <Nav.Link className=" fw-bolder border-bottom border-secondary p-2 pb-4" href="/AgregarCamiones"> <BsPlusSquareFill/> Agrega tu camion</Nav.Link>
+                  <Nav.Link className=" fw-bolder border-bottom border-secondary p-2 pb-4" href="/Registro"> <BsFillPersonPlusFill/> Registro</Nav.Link>
                   
                   
                 

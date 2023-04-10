@@ -9,7 +9,7 @@ function Title() {
       style= {{display:'flex', justifyContent:'center', height: '60px', fontSize: '1.6rem', color:"white", background:"gray"}} >
         <div >
           <h1 className='fw-bold'> 
-            {location.pathname === `/` ? "Lista de camiones" : location.pathname === `/AgregarCamiones` ? "Agrega tu camion" : location.pathname === `/login` ? "Inicia sesion" : ""} 
+            {location.pathname === `/` ? "Lista de camiones" : location.pathname === `/AgregarCamiones` ? "Agrega tu camion" : location.pathname === `/login` ? "Inicia sesion" : location.pathname === `/Registro` ? "Registro" : ""} 
           </h1>
         </div>
     </Container>

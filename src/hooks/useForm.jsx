@@ -41,7 +41,6 @@ export const useForm = (initialForm, validateForm) => {
             return
         }
     }
-
     return {
         form,
         errors,

@@ -1,8 +1,7 @@
 import { useForm } from "../../hooks/useForm"
-import { UserLogin } from "../../api/Model/User"
+import { NewUser } from "../../api/Model/User"
 import { useState } from "react"
-import useAuth from "../../hooks/useAuth"
-import { Link, useNavigate, } from "react-router-dom"
+
 
 const initialForm = {
     email: "",
@@ -26,10 +25,9 @@ const vaildateForm = (form) => {
     return errors
 }
 const ContactForm = () => {
-    const { setAuth } = useAuth() // aca uso el hook y remplazo useContext(AuthContext) global auth
-    const navigate = useNavigate()
- 
+   
 
+   
     const [Loading, setLoading] = useState(false)
     const {
         form,
@@ -46,70 +44,25 @@ const ContactForm = () => {
                 console.log(errors)
                 return false
             }
-            const api_response = await UserLogin(form)
+            const api_response = await NewUser(form)
+     
             if (api_response.status === 200) {
-                console.log(1)
-                const accessToken = api_response?.data?.accessToken;
-                console.log(accessToken)
-                setAuth((prevAuth) => ({
-                    ...prevAuth,
-                    email: form.email,
-                    password: form.password,
-                    accessToken: accessToken,
-                    auth: true
-                }))
-                // setForm({ email: '', password: '' }) PREGUNTAR A FEDE
-                navigate('/') //USO NAVIGATE  PARA REDIRIGIR AL USUARIO A LA RAIZ DEL SITIO, PREG A FEDE SI ACA FLASHIE
+                const { data } = api_response
+                console.log(data)
             }
         } catch (error) {
-            console.log(error.response?.data || error.message)
-            console.log(error)
+                console.log(error)
         } finally {
             setLoading(false)
         }
     }
-    /*
-  const handleFetch = async (e) => {
-      e.preventDefault()
-      setLoading(true)
-      
-      try {
-          if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
-              //hay errores
-              console.log(errors)
-              return false
-          }
-          console.log(form)
-          //faltaba poner parametro donde se crea la func
-          const api_response = await UserLogin(form)
-          if (api_response.status === 200) {
-              const { data } = api_response
-              console.log(data)
-              const accessToken = api_response?.data?.accessToken;
-              setAuth({ email : form.email, password: form.password , accessToken}) // preguntar a fede como paso las props email y password aca.
-              setSucces(true)
-          }
-      } catch (error) {
-          console.log(error.response.data)
-          console.log(error)
-      }
-      finally {
-          setLoading(false)
-        }
-  }
-  /*useEffect (() => {
-      handleFetch()
-    },[])*/
-
     if (Loading) { return (<>Loading..</>) }
-
-    // preg a fede si elimino el handlesubmit
     return (
         <div className='container'>
             <div className="container ">
                 <div className="col-md-11 mt-5">
                     <form onSubmit={handleSubmit} className='position-relative'>
-                        <h4 className="mb-3">Iniciar sesion</h4>
+                        <h4 className="mb-3">Registrate</h4>
                         <div className="row">
                             <div className="form-group col-md-6 mb-3">
                                 <label htmlFor="email">Email</label>
@@ -138,9 +91,8 @@ const ContactForm = () => {
                                 {errors.password && <p className='text-danger' >{errors.password}</p>}
                             </div>
                         </div>
-                      
+                        <br />
                         <div className="form-group">
-                            <p>No tenes cuenta? <Link className="fw-bolder p-2 pb-4 " to="/Registro"> Registrate</Link></p>
                             <button onClick={handleFetch}>
                                 Enviar
                             </button>
@@ -151,4 +103,5 @@ const ContactForm = () => {
         </div>
     )
 }
+
 export default ContactForm
