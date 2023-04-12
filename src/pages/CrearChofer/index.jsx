@@ -237,7 +237,7 @@ const handleFetch = async (e) => {
                 onChange={handleChange}
                 value={form.id}>
                 <option value="">Opciones...</option>
-                <option value={1}>Provincia</option>
+                <option >Provincia</option>
                 <option value={2}>Localidad</option>
                 <option value={3}>3</option>
               </select>
