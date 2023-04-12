@@ -5,6 +5,9 @@ import ListaCamiones from "./pages/ListaCamiones";
 import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import Registro from "./pages/Registro"
+import CrearChofer from "./pages/CrearChofer"
+import Choferes from "./pages/Choferes";
+
 
 function App() {
   return (
@@ -14,6 +17,8 @@ function App() {
         <Route path="/Registro" element={<Layout title="Registro"><Registro/></Layout>}/>
         <Route path="/AgregarCamiones" element={<PrivateRoute><Layout title="Agregar Camiones"><AgregarCamiones/></Layout></PrivateRoute>}/> 
         <Route path="/" element={<PrivateRoute><Layout title="Lista de Camiones"><ListaCamiones/></Layout></PrivateRoute>}/>
+        <Route path="/CrearChofer" element={<PrivateRoute><Layout title="Choferes"><CrearChofer/></Layout></PrivateRoute>}/>
+        <Route path="/Choferes" element={<PrivateRoute><Layout title="Choferes"><Choferes/></Layout></PrivateRoute>}/>
       </Routes> 
     </BrowserRouter>
   )

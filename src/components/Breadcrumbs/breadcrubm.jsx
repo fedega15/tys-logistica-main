@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 const Breadcrumbs = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-  const hideLogin = currentPath === "/AgregarCamiones" || currentPath === "/";
+  const hideLogin = currentPath === "/AgregarCamiones" || currentPath === "/" || currentPath === "/CrearChofer" || currentPath === "/Choferes";
   const hideLogin2 = currentPath === "/login" 
   const hideLogin3 = currentPath === "/Registro"
   
@@ -12,14 +12,20 @@ const Breadcrumbs = () => {
     {!hideLogin && (
       <Link to="/login" className={`breadcrumb-item ${currentPath === "/login" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Iniciar sesión</Link>
     )}
+      {!hideLogin && (
+        <Link to="/Registro" className={`breadcrumb-item ${currentPath === "/Registro" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Registro</Link>
+      )}
     {!hideLogin2 && !hideLogin3 && (
-      <Link to="/" className={`breadcrumb-item ${currentPath === "/" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Lista de camiones</Link>
+      <Link to="/" className={`breadcrumb-item ${currentPath === "/" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Lista de vehiculos</Link>
     )}
     {!hideLogin2 && !hideLogin3 && (
-      <Link to="/AgregarCamiones" className={`breadcrumb-item ${currentPath === "/AgregarCamiones" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Agregar camión</Link>
+      <Link to="/AgregarCamiones" className={`breadcrumb-item ${currentPath === "/AgregarCamiones" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Agregar Vehiculo</Link>
     )}
-    {!hideLogin && (
-      <Link to="/Registro" className={`breadcrumb-item ${currentPath === "/Registro" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Registro</Link>
+    {!hideLogin2 && !hideLogin3 && (
+      <Link to="/Choferes" className={`breadcrumb-item ${currentPath === "/Choferes" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Choferes</Link>
+    )}
+    {!hideLogin2 && !hideLogin3 && (
+      <Link to="/CrearChofer" className={`breadcrumb-item ${currentPath === "/CrearChofer" ? "text-primary" : "text-secondary"}`} style={{ textDecoration: "none" }}>Crea el chofer</Link>
     )}
   </Breadcrumb>
   );

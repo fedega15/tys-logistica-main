@@ -1,21 +1,20 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 import logopng from "./logo.png"
-import {RiLoginBoxFill } from "react-icons/ri"
-import {FaListAlt } from "react-icons/fa"
-import {BsPlusSquareFill } from "react-icons/bs"
-import {BsFillPersonPlusFill } from "react-icons/bs"
+import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
+import { RiLoginBoxFill } from 'react-icons/ri';
+import { BsFillPersonPlusFill, BsPlusSquareFill } from 'react-icons/bs';
+import { FaListAlt } from 'react-icons/fa';
 
 const Navbar1 = () => {
+  const location = useLocation();
+  const showLoginAndRegisterLinks = location.pathname === '/login' || location.pathname === '/Registro';
+
   return (
     <>
       {[false,].map((expand) => (
-        <Navbar key={expand} bg="light"  expand={expand} >
+        <Navbar key={expand} bg="light" expand={expand}>
           <Container fluid style={{ height:"70px"}}>
-
-          <Navbar.Brand className='d-flex justify-content-center' style={{height:"60px"}} href="/"><br/> 
+            <Navbar.Brand className='d-flex justify-content-center' style={{height:"60px"}} href="/">
               <img src={logopng} style={{ marginRight : '10px' ,width: '47px', height: '48px',  }} alt="" />
               <h1 className='fw-semibold' >Logistica TyS</h1>
             </Navbar.Brand>
@@ -27,19 +26,26 @@ const Navbar1 = () => {
             >
               <Offcanvas.Header  closeButton className='h-12'>
                 <Offcanvas.Title className='fw-semibold fs-2' id={`offcanvasNavbarLabel-expand-${expand}`}>
-                <img src={logopng} style={{ marginRight : '20px', width: '36px', height: '34px',marginTop:"-10px"  }} alt="" />
+                  <img src={logopng} style={{ marginRight : '20px', width: '36px', height: '34px',marginTop:"-10px"  }} alt="" />
                   Logistica TyS
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link className="fw-bolder border-bottom border-secondary border-top p-2 pb-4 " href="/login"> <RiLoginBoxFill/> Inicia sesion</Nav.Link>
-                  <Nav.Link className="fw-bolder border-bottom border-secondary p-2 pb-4" href="/"> <FaListAlt/> Lista camiones</Nav.Link>
-                  <Nav.Link className=" fw-bolder border-bottom border-secondary p-2 pb-4" href="/AgregarCamiones"> <BsPlusSquareFill/> Agrega tu camion</Nav.Link>
-                  <Nav.Link className=" fw-bolder border-bottom border-secondary p-2 pb-4" href="/Registro"> <BsFillPersonPlusFill/> Registro</Nav.Link>
-                  
-                  
-                
+                  {showLoginAndRegisterLinks && (
+                    <>
+                      <Link className=" text-secondary fw-bolder border-bottom border-secondary border-top p-2 pb-4" to="/login" style={{ textDecoration: "none" }}><RiLoginBoxFill/> Inicia sesión</Link>
+                      <Link className="text-secondary fw-bolder border-bottom border-secondary p-2 pb-4" to="/Registro" style={{ textDecoration: "none" }}><BsFillPersonPlusFill/> Registro</Link>
+                    </>
+                  )}
+                  {!showLoginAndRegisterLinks && (
+                    <>
+                      <Link className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4" to="/" style={{ textDecoration: "none" }}><FaListAlt/> Vehiculos</Link>
+                      <Link className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4" to="/agregar-camiones" style={{ textDecoration: "none" }}><BsPlusSquareFill/> Agrega tu vehiculo</Link>
+                      <Link className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4" to="/Choferes" style={{ textDecoration: "none" }}><FaListAlt/> Choferes</Link>
+                      <Link className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4" to="/Crearchofer" style={{ textDecoration: "none" }}><BsFillPersonPlusFill/> Agrega tu chofer</Link>
+                    </>
+                  )}
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
