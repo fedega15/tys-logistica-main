@@ -5,6 +5,7 @@ import {handleFetchError} from '../../utils/errorhandler';
 import { Vehicle } from '../../components/Vehicle';
 
 
+
 const  ListaCamiones1 = () => {
   const [Loading, setLoading] = useState (false)
   const [error, setError] = useState ('')
@@ -20,7 +21,7 @@ const  ListaCamiones1 = () => {
         const {data} = api_response 
         setVehicles(data)  
         console.log(data)
-        console.log(vehicles)    
+        console.log(vehicles)  // aca me da vacio  
       }
       
     } catch (error) {

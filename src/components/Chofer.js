@@ -5,13 +5,13 @@ import { AiFillDashboard } from 'react-icons/ai';
 import { AiFillSecurityScan } from 'react-icons/ai';
 import { AiFillTags } from 'react-icons/ai';
 
-export const Chofer = ({  razonSocial,cuil,direccion,idLocalidad,codigoPostal,telefono,correo,dateRevMedica,dateCargaGrl,dateCargaPeligrosa,dateLicConducir,dateCredPuerto,apelnomb,  }) => {
+export const Chofer = ({ nomb_empresa, nombre,nombrecorto,activo,id_chofer,id_empresa, id_razonsocial,cuil,direccion,idLocalidad,codigoPostal,telefono,correo,dateRevMedica,dateCargaGral,dateCargaPeligrosa,dateLicConducir,dateCredPuerto,apelnomb,  }) => {
     return (
         <div>
          <h4 className=''>Apellido y Nombre: </h4>
             <span > <AiTwotoneSchedule/>"{apelnomb}" </span>
          <h4 className='border-top  border-primary'>Razon Social: </h4>
-            <span> <AiFillDashboard/>"{razonSocial}" </span>
+            <span> <AiFillDashboard/>"{id_razonsocial}" </span>
         <h4 className='border-top  border-primary'>Correo: </h4>
             <span> <HiCog/>"{correo}" </span>
         <h4 className='border-top  border-primary'>Direccion: </h4>
@@ -25,7 +25,7 @@ export const Chofer = ({  razonSocial,cuil,direccion,idLocalidad,codigoPostal,te
         <h4 className='border-top border-primary '>Carga Peligrosa: </h4>
             <span> <AiFillSecurityScan/>"{dateCargaPeligrosa}" </span>
         <h4 className='border-top border-primary '>Carga General: </h4>
-            <span> <AiFillSecurityScan/>"{dateCargaGrl}" </span>
+            <span> <AiFillSecurityScan/>"{dateCargaGral}" </span>
         <h4 className='border-top border-primary '>Numero de Cuil: </h4>
             <span> <AiFillSecurityScan/>"{cuil}" </span>
         <h4 className='border-top border-primary '>Codigo Postal: </h4>
