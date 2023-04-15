@@ -45,7 +45,7 @@ const  ListaCamiones1 = () => {
     alwaysOpen>
        {vehicles.map((vehicle,index)  =>( 
           <Accordion.Item eventKey={index} key={index} >
-            <Accordion.Header> <h5 className='fw-semibold'>VEHICULO  {vehicle.id} </h5></Accordion.Header>
+            <Accordion.Header> <h5 className='font-italic text-dark'>VEHICULO  {vehicle.id} </h5></Accordion.Header>
             <Accordion.Body className='bg-green'>
             <Vehicle key={vehicle.id} {...vehicle}/>
             </Accordion.Body>
