@@ -6,23 +6,23 @@ import { Chofer } from '../../components/Chofer';
 
 
 
-
 const  Choferes = () => {
   const [Loading, setLoading] = useState (false)
   const [error, setError] = useState ('')
-  const [choferes, setChoferes] = useState([])
+  const [driver, setDriver] = useState([])
 
   const handleFetchChoferes = async() => {
     setLoading(true)
+    
   try {
       const api_response = await getChofer()
       console.log(`Respuesta`)
       console.log(api_response.data) // perfecto recibo un array
-      if(api_response.status === 200){
+      if(api_response.status === 201){
         const {data} = api_response 
-        setChoferes(data) 
-        console.log (data)
-        console.log(choferes) 
+        setDriver(data) 
+        console.log(data)
+        console.log(driver) 
       }
       
     } catch (error) {
@@ -42,29 +42,19 @@ const  Choferes = () => {
 
  
   return (
-    <div>
-    {choferes.length > 0 ? (
-      <ul>
-        {choferes.map((chofer) => (
-          <li key={chofer.id}>{chofer.nombre}</li>
-        ))}
-      </ul>
-    ) : (
-      <p>No se encontraron choferes</p>
-    )}
-  </div>
+  
    
-   /* <Accordion defaultActiveKey={['0']} 
+    <Accordion defaultActiveKey={['0']} 
     alwaysOpen>
-       {choferes.map((chofer,index)  =>( 
+       {driver.map((driver,index)  =>( 
           <Accordion.Item eventKey={index} key={index} >
-            <Accordion.Header> <h5 className='fw-semibold'>CHOFER  {chofer.id} </h5></Accordion.Header>
+            <Accordion.Header> <h5 className='fw-semibold'>CHOFER  {driver.nombre} </h5></Accordion.Header>
             <Accordion.Body className='bg-green'>
-            <Chofer key={chofer.id} {...chofer}/>
+            <Chofer key={driver.id_chofer} {...driver}/>
             </Accordion.Body>
           </Accordion.Item>
         ))}
-    </Accordion> */
+    </Accordion> 
   );
 }
 

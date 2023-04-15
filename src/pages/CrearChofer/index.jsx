@@ -1,10 +1,11 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from '../../hooks/useForm'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CrearChofer } from '../../api/Model/Chofer'
 import validateForm from '../../components/validateForm'
+import { getProvincias, getLocalidades } from '../../api/Model/Localidades' 
 
 const initialForm = {
   razonSocial: "",
@@ -29,10 +30,14 @@ const CrearChoferes = () => {
     handleChange,
     handleBlur, 
     handleSubmit,
-} = useForm(initialForm, validateForm)
+  } = useForm(initialForm, validateForm)
 
 const [sending, setSending] = useState(false);
 const [sent, setSent] = useState(false);
+const [provincias, setProvincias] = useState([]) 
+const [localidades, setLocalidades] = useState([])
+const [localidad, setLocalidad] = useState()
+const [provincia, setProvincia] = useState()
   
 const handleFetch = async (e) => {
   try {
@@ -62,7 +67,48 @@ const handleFetch = async (e) => {
           setSending(false)
   }
 }
-  return (
+
+  const handleFetchProvincias = async () => {
+  
+    try {	
+      const api_response = await getProvincias() 
+      if (api_response.status === 200) {
+        console.log(api_response.data)
+        setProvincias([ ...api_response.data])
+      } 
+    }catch (error) {
+        console.log(error)}
+    }
+
+  const handleFetchLocalidades = async (idProvincia) => {
+  
+    try {	
+      const api_response = await getLocalidades(idProvincia) 
+      if (api_response.status === 200) {
+        console.log(api_response.data)
+        setLocalidades([ ...api_response.data])
+      } 
+    }catch (error) {
+        console.log(error)}
+    }
+    
+  const handleChange1 = (e, target) => {
+    const { value } = e.target
+    if (target === 'p') {
+      handleFetchLocalidades(value)
+      setProvincia(value)  
+    } else {
+      setLocalidad(value)
+  }
+  }
+
+  useEffect(() => {
+    handleFetchProvincias()
+  }, [])
+
+  console.log(`Provincias: ${provincia}`)
+  console.log(`localidad: ${localidad}`)
+    return (
     <div className="container">
 
       <div className="col-md-12 mt-5">
@@ -211,36 +257,25 @@ const handleFetch = async (e) => {
           </div>
 
           <div className="row">
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="country">Tipo</label>
-              <select 
-                type="number"
-                className="custom-select d-block w-100" 
-                id="tipo" 
-                name="tipo"
-                onChange={handleChange}
-                value={form.tipo}>
-                <option value="">Opciones...</option>
-                <option value={1}>Camion</option>
-                <option value={2}>Acoplado</option>
-                <option value={3}>Camion + Acoplado</option>
-              </select>
-            </div>
-
+            
             <div className="form-group col-md-6 mb-3 color">
               <label htmlFor="state">Localidad</label>
               <select 
                 className="custom-select d-block w-100" 
                 type="text"
-                id="idLocalidad" 
-                name="idLocalidad"
-                onChange={handleChange}
-                value={form.id}>
-                <option value="">Opciones...</option>
-                <option >Provincia</option>
-                <option value={2}>Localidad</option>
-                <option value={3}>3</option>
+                onChange={(e) => handleChange1 (e,'p')}
+                >
+
+              {provincias.length > 0 ? provincias.map((p) => {
+                return <option value={p.id}>{p.nombrecorto}</option>
+              }) : null}
               </select>
+              {!provincia ? null :
+                <select onChange={(e) => handleChange1(e, 'l')}> 
+                  {localidades.length > 0 ? localidades.map((l) => 
+                  {return (<option value={l.id} key={l.id}>{l.nombre}</option>)  }) : null}
+                </select>
+              } 
             </div>
           </div>
           <div className="form-group">
