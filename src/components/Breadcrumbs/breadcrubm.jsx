@@ -12,45 +12,48 @@ const Breadcrumbs = () => {
   const hideLogin3 = currentPath === "/Registro";
 
   return (
-    <Breadcrumb
+    <Breadcrumb className="p-0"
       style={{
-        backgroundColor: "#e6e6e6",
+        
+        backgroundColor: "#198754",
         display: "flex",
         alignItems: "center",
         height: "100%",
+        padding:"0px",
+        gap:"0px",
       }}
     >
       {!hideLogin && (
         <Link
           to="/login"
           className={`breadcrumb-item ${
-            currentPath === "/login" ? "text-primary" : "text-secondary"
+            currentPath === "/login" ? "text-white-50" : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-          Iniciar sesión
+           Iniciar sesión
         </Link>
       )}
       {!hideLogin && (
         <Link
           to="/Registro"
           className={`breadcrumb-item ${
-            currentPath === "/Registro" ? "text-primary" : "text-secondary"
+            currentPath === "/Registro" ? "text-white-50" : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-          Registro
+          /  Registro
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
         <Link
           to="/"
           className={`breadcrumb-item ${
-            currentPath === "/" ? "text-primary" : "text-secondary"
+            currentPath === "/" ? "text-white-50" : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-          Lista de vehiculos
+         Lista de vehiculos
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
@@ -58,34 +61,34 @@ const Breadcrumbs = () => {
           to="/AgregarCamiones"
           className={`breadcrumb-item ${
             currentPath === "/AgregarCamiones"
-              ? "text-primary"
-              : "text-secondary"
+              ? "text-white-50"
+              : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-          Crear vehiculo
+        / Crear vehiculo
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
         <Link
           to="/Choferes"
           className={`breadcrumb-item ${
-            currentPath === "/Choferes" ? "text-primary" : "text-secondary"
+            currentPath === "/Choferes" ? "text-white-50" : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-          Choferes
+          / Choferes
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
         <Link
           to="/CrearChofer"
           className={`breadcrumb-item ${
-            currentPath === "/CrearChofer" ? "text-primary" : "text-secondary"
+            currentPath === "/CrearChofer" ? "text-white-50" : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-          Crear chofer
+         / Crear chofer
         </Link>
       )}
     </Breadcrumb>

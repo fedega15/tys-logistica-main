@@ -12,15 +12,24 @@ const initialForm = {
   cuil: "",
   direccion: "",
   idLocalidad: "",
-  codigoPostal: "",
+  codigopostal: "",
   telefono: "",
   correo: "",
   dateRevMedica: "",
-  dateCargaGrl: "",
+  dateCargaGral: "",
   dateCargaPeligrosa: "",
   dateLicConducir: "",
   dateCredPuerto: "",
   apelnomb: "",
+  nomb_empresa:"",
+  nombrecorto:"",
+  id_chofer:"",
+  id_empresa:"",
+  nombre:"",
+  activo:"",
+
+
+
 };
 
 const CrearChoferes = () => {
@@ -55,7 +64,7 @@ const CrearChoferes = () => {
 
       if (api_response.status === 200) {
         const { data } = api_response;
-        console.log(data);
+       // console.log(data);
       }
       setSending(false);
       setSent(true);
@@ -81,7 +90,7 @@ const CrearChoferes = () => {
     try {
       const api_response = await getLocalidades(id_provincia);
       if (api_response.status === 200) {
-        console.log(api_response.data);
+       // console.log(api_response.data);
         setLocalidades([...api_response.data]);
       }
     } catch (error) {
@@ -103,8 +112,8 @@ const CrearChoferes = () => {
     handleFetchProvincias();
   }, []);
 
-  console.log(`Provincias: ${provincia}`);
-  console.log(`localidad: ${localidad}`);
+  // console.log(`Provincias: ${provincia}`);
+  //    console.log(`localidad: ${localidad}`);
   return (
     <div className="container">
       <div className="col-md-12 mt-5">
@@ -153,6 +162,30 @@ const CrearChoferes = () => {
               {errors.correo && <p className="text-danger">{errors.correo}</p>}
             </div>
             <div className="form-group col-md-6 mb-3">
+              <label htmlFor="firstname">Provincia:</label>
+              <input
+                type="text"
+                name="nombrecorto"
+                placeholder="gustavo witz"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={form.nombrecorto}
+              />
+              {errors.nombrecorto && <p className="text-danger">{errors.nombrecorto}</p>}
+            </div>
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="firstname">Nombre Empresa:</label>
+              <input
+                type="text"
+                name="nomb_empresa"
+                placeholder="gustavo witz"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={form.nomb_empresa}
+              />
+              {errors.nomb_empresa && <p className="text-danger">{errors.nomb_empresa}</p>}
+            </div>
+            <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Direccion:</label>
               <input
                 type="text"
@@ -164,6 +197,20 @@ const CrearChoferes = () => {
               />
               {errors.direccion && (
                 <p className="text-danger">{errors.direccion}</p>
+              )}
+            </div>
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="firstname">Nombre:</label>
+              <input
+                type="text"
+                name="nombre"
+                placeholder="gustavo witz"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={form.nombre}
+              />
+              {errors.nombre && (
+                <p className="text-danger">{errors.nombre}</p>
               )}
             </div>
             <div className="form-group col-md-6 mb-3">
@@ -227,14 +274,14 @@ const CrearChoferes = () => {
               <label htmlFor="lastname">Carga General:</label>
               <input
                 type="text"
-                name="dateCargaGrl"
+                name="dateCargaGral"
                 placeholder="20-40454618-0"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={form.dateCargaGrl}
+                value={form.dateCargaGral}
               />
-              {errors.dateCargaGrl && (
-                <p className="text-danger">{errors.dateCargaGrl}</p>
+              {errors.dateCargaGral && (
+                <p className="text-danger">{errors.dateCargaGral}</p>
               )}
             </div>
             <div className="form-group col-md-6 mb-3">
@@ -268,14 +315,56 @@ const CrearChoferes = () => {
               <label htmlFor="email">Codigo Postal:</label>
               <input
                 type="number"
-                name="codigoPostal"
+                name="codigopostal"
                 placeholder="2000"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={form.codigoPostal}
+                value={form.codigopostal}
               />
-              {errors.codigoPostal && (
-                <p className="text-danger">{errors.codigoPostal}</p>
+              {errors.codigopostal && (
+                <p className="text-danger">{errors.codigopostal}</p>
+              )}
+            </div>
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="email">ID del chofer:</label>
+              <input
+                type="number"
+                name="id_chofer"
+                placeholder="2000"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={form.id_chofer}
+              />
+              {errors.id_chofer && (
+                <p className="text-danger">{errors.id_chofer}</p>
+              )}
+            </div>
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="email">ID la empresa:</label>
+              <input
+                type="number"
+                name="id_empresa"
+                placeholder="2000"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={form.id_empresa}
+              />
+              {errors.id_empresa && (
+                <p className="text-danger">{errors.id_empresa}</p>
+              )}
+            </div>
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="email">ID la razonsocial:</label>
+              <input
+                type="number"
+                name="id_razonsocial"
+                placeholder="2000"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={form.id_razonsocial}
+              />
+              {errors.id_razonsocial && (
+                <p className="text-danger">{errors.id_razonsocial}</p>
               )}
             </div>
           </div>
@@ -293,7 +382,7 @@ const CrearChoferes = () => {
               >
                 {provincias.length > 0
                   ? provincias.map((p) => {
-                      return <option value={p.id}>{p.nombrecorto}</option>;
+                      return <option key={p.id} value={p.id}>{p.nombrecorto}</option>;
                     })
                   : null}
               </select>
@@ -313,7 +402,7 @@ const CrearChoferes = () => {
                   {localidades.length > 0
                     ? localidades.map((l) => {
                         return (
-                          <option value={l.id} key={l.id}>
+                          <option  value={l.id} key={l.id}>
                             {l.nombre}
                           </option>
                         );

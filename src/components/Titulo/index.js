@@ -7,18 +7,18 @@ function Title() {
   return (
     <Container
       fluid
-      className="bg-secondary bg-gradient text-white "
+      className="bg-success bg-opacity-75 text-white "
       style={{
         display: "flex",
         justifyContent: "center",
         height: "60px",
         fontSize: "1.6rem",
         color: "white",
-        background: "gray",
+        background: "#e6e6e6",
       }}
     >
       <div>
-        <h1 className="fw-bold">
+        <h1 className="fw-bold bg-succes">
           {location.pathname === `/`
             ? "Lista de vehiculos"
             : location.pathname === `/AgregarCamiones`

@@ -56,50 +56,51 @@ const Navbar1 = () => {
                   {showLoginAndRegisterLinks && (
                     <>
                       <Link
-                        className=" text-secondary fw-bolder border-bottom border-secondary border-top p-2 pb-4"
+                        className=" text-dark fw-bolder border-bottom border-secondary border-top p-2 pb-4"
                         to="/login"
                         style={{ textDecoration: "none" }}
                       >
-                        <RiLoginBoxFill /> Inicia sesión
+                        <RiLoginBoxFill className="text-dark" /> Inicia sesión
                       </Link>
                       <Link
-                        className="text-secondary fw-bolder border-bottom border-secondary p-2 pb-4"
+                        className="text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/Registro"
                         style={{ textDecoration: "none" }}
                       >
-                        <BsFillPersonPlusFill /> Registro
+                        <BsFillPersonPlusFill  className="text-secondary"/> Registro
                       </Link>
                     </>
                   )}
                   {!showLoginAndRegisterLinks && (
                     <>
                       <Link
-                        className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4"
+                        className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/"
                         style={{ textDecoration: "none" }}
                       >
-                        <FaListAlt /> Vehiculos
+                        <FaListAlt className="text-secondary" /> Vehiculos
                       </Link>
                       <Link
-                        className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4"
+                        className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/Choferes"
                         style={{ textDecoration: "none" }}
                       >
-                        <FaListAlt /> Choferes
+                        <FaListAlt className="text-secondary"/> Choferes
                       </Link>
+                      
                       <Link
-                        className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4"
+                        className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/AgregarCamiones"
                         style={{ textDecoration: "none" }}
                       >
-                        <BsPlusSquareFill /> Crear vehiculo
+                        <BsPlusSquareFill  className="text-secondary" /> Crear vehiculo
                       </Link>
                       <Link
-                        className=" text-secondary fw-bolder border-bottom border-secondary p-2 pb-4"
+                        className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/Crearchofer"
                         style={{ textDecoration: "none" }}
                       >
-                        <BsFillPersonPlusFill /> Crear chofer
+                        <BsFillPersonPlusFill className="text-secondary"/> Crear chofer
                       </Link>
                     </>
                   )}

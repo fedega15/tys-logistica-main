@@ -26,13 +26,13 @@ const validateForm = (form) => {
   } else if (String(form.dateCargaPeligrosa).trim().length < 5) {
     errors.dateCargaPeligrosa = "El campo debe ser mayor 5 caracteres";
   }
-  if (!form.dateCargaGrl.trim()) {
-    errors.dateCargaGrl = "la Carga General es requerida";
-  } else if (String(form.dateCargaGrl).trim().length < 5) {
-    errors.dateCargaGrl = "El campo debe ser mayor 5 caracteres";
+  if (!form.dateCargaGral.trim()) {
+    errors.dateCargaGral = "la Carga General es requerida";
+  } else if (String(form.dateCargaGral).trim().length < 5) {
+    errors.dateCargaGral = "El campo debe ser mayor 5 caracteres";
   }
   if (!form.dateRevMedica.trim()) {
-    errors.dateRevMedica = "la Revizacion medica es requerida";
+    errors.dateRevMedica = "la Revisacion medica es requerida";
   } else if (String(form.dateRevMedica).trim().length < 5) {
     errors.dateRevMedica = "El campo debe ser mayor 5 caracteres";
   }
@@ -46,6 +46,21 @@ const validateForm = (form) => {
   } else if (form.correo.length < 5) {
     errors.correo = "El campo debe ser mayor 5 caracteres";
   }
+  if (!form.nombrecorto) {
+    errors.nombrecorto = "la provincia es requerida";
+  } else if (form.nombrecorto.length < 5) {
+    errors.nombrecorto = "El campo debe ser mayor 5 caracteres";
+  }
+  if (!form.nombre) {
+    errors.nombre = "el nombre es requerido";
+  } else if (form.nombre.length < 5) {
+    errors.nombre = "El campo debe ser mayor 5 caracteres";
+  }
+  if (!form.nomb_empresa) {
+    errors.nomb_empresa = "el Nombre de la empresa es requerido";
+  } else if (form.nomb_empresa.length < 5) {
+    errors.nomb_empresa = "El campo debe ser mayor 5 caracteres";
+  }
   if (!form.telefono) {
     errors.telefono = "la localidad es requerido";
   } else if (form.telefono.length < 3) {
@@ -56,10 +71,26 @@ const validateForm = (form) => {
   } else if (form.cuil.length < 5) {
     errors.cuil = "El campo debe ser mayor 5 caracteres";
   }
-  if (!form.codigoPostal) {
-    errors.codigoPostal = "el codigo postal es requerido"; // este debe ser un numero acomodar preg a fede.
-  } else if (form.codigoPostal.length < 5) {
-    errors.codigoPostal = "El campo debe ser mayor 5 caracteres";
+  if (!form.codigopostal) {
+    errors.codigopostal = "el codigo postal es requerido"; // este debe ser un numero acomodar preg a fede.
+  } else if (form.codigopostal.length < 5) {
+    errors.codigopostal = "El campo debe ser mayor 5 caracteres";
+  }
+  
+  if (!form.id_chofer) {
+    errors.id_chofer = "el id del chofer es requerido"; // este debe ser un numero acomodar preg a fede.
+  } else if (form.id_chofer.length < 5) {
+    errors.id_chofer = "El campo debe ser mayor 5 caracteres";
+  }
+  if (!form.id_empresa) {
+    errors.id_empresa = "el id de la empresa es requerido"; // este debe ser un numero acomodar preg a fede.
+  } else if (form.id_empresa.length < 5) {
+    errors.id_empresa = "El campo debe ser mayor 5 caracteres";
+  }
+  if (!form.id_razonsocial) {
+    errors.id_razonsocial = "el id de la razon social es requerido"; // este debe ser un numero acomodar preg a fede.
+  } else if (form.id_razonsocial.length < 5) {
+    errors.id_razonsocial = "El campo debe ser mayor 5 caracteres";
   }
   return errors;
 };

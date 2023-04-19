@@ -16,7 +16,7 @@ export const Chofer = ({
   cuil,
   direccion,
   idLocalidad,
-  codigoPostal,
+  codigopostal,
   telefono,
   correo,
   dateRevMedica,
@@ -80,7 +80,7 @@ export const Chofer = ({
       <h5 className="text-dark border-top p-2 ">Codigo Postal: </h5>
       <span className="text-muted p-2">
         {" "}
-        <AiFillSecurityScan />"{codigoPostal}"{" "}
+        <AiFillSecurityScan />"{codigopostal}"{" "}
       </span>
       <h5 className="text-dark border-top p-2 ">Telefono: </h5>
       <span className="text-muted p-2">
@@ -92,6 +92,7 @@ export const Chofer = ({
         {" "}
         <AiFillSecurityScan />"{idLocalidad}"{" "}
       </span>
+     
     </div>
   );
 };
