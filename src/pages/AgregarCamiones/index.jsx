@@ -1,9 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useForm } from "../../hooks/useForm";
-import { AgregarCamion } from "../../api/Model/Vehicle";
-import { useState } from "react";
+import { AgregarCamion, ModificarCamion } from "../../api/Model/Vehicle";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { useLocation } from "react-router-dom";
 
 const initialForm = {
   tipo: "",
@@ -40,35 +42,41 @@ const vaildateForm = (form) => {
   return errors;
 };
 
-const AgregarCamiones = () => {
+const AgregarModificarCamiones = () => {
+  const { state: paramVehicle } = useLocation(); // obteng el objeto state pasado como parámetro se asigna a paramVehicle el valor de state
+  // console.log(paramVehicle);
+  const [vehicle, setVehicle] = useState(paramVehicle || initialForm); // estado vehicle que se inicializa con el valor de paramVehicle si hay, sino se utiliza el valor de initialForm
   const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
-    initialForm,
+    vehicle,
     vaildateForm
   );
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleFetch = async (e) => {
+  const handleFetch = async (paramVehicle) => {
     try {
-      e.preventDefault();
-      if (
-        errors.hasOwnProperty("patente") ||
-        errors.hasOwnProperty("NumChasis") ||
-        errors.hasOwnProperty("NumMotor") ||
-        errors.hasOwnProperty("NumMovil")
-      ) {
-        //hay errores
-        console.log(errors);
-        return false;
-      }
+      let api_response;
       setSending(true);
-      const api_response = await AgregarCamion(form);
-      setSending(false);
 
-      if (api_response.status === 200) {
-        const { data } = api_response;
-        console.log(data);
+      if (!paramVehicle) {
+        api_response = await AgregarCamion(form);
+        setSending(false);
+
+        if (api_response.status === 200) {
+          const { data } = api_response;
+          console.log(data);
+        }
+      } else {
+        console.log(paramVehicle);
+        api_response = await ModificarCamion(form, {
+          id: paramVehicle.id,
+        });
+
+        if (api_response.status === 200) {
+          const { data } = api_response;
+          console.log(data);
+        }
       }
       setSending(false);
       setSent(true);
@@ -77,6 +85,18 @@ const AgregarCamiones = () => {
       setSending(false);
     }
   };
+  useEffect(() => {
+    //manejo los cambios en el estado paramVehicle. Si paramVehicle cambia, la función establece el estado vehicle en paramVehicle
+    if (paramVehicle) {
+      console.log("hay parametro");
+      setVehicle(paramVehicle);
+      // console.log(paramVehicle);
+      console.log(vehicle);
+    } else {
+      console.log("no hay parametro");
+    }
+  }, [paramVehicle]);
+
   return (
     <div className="container">
       <div className="col-md-12 mt-5">
@@ -202,4 +222,4 @@ const AgregarCamiones = () => {
     </div>
   );
 };
-export default AgregarCamiones;
+export default AgregarModificarCamiones;

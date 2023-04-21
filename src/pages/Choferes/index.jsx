@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getChofer } from "../../api/Model/Chofer";
 import { handleFetchError } from "../../utils/errorhandler";
 import { Chofer } from "../../components/Chofer";
-import * as XLSX from "xlsx"
+import * as XLSX from "xlsx";
 
 const Choferes = () => {
   const [Loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ const Choferes = () => {
     try {
       const api_response = await getChofer();
       // console.log(`Respuesta`);
-      console.log(api_response.data); // perfecto recibo un array
+      // console.log(api_response.data); // perfecto recibo un array
       if (api_response.status === 201) {
         const { data } = api_response;
         setDriver(data);
@@ -35,26 +35,25 @@ const Choferes = () => {
   const searcher = (e) => {
     setSearch(e.target.value);
   };
-  
-  
+
   let results = [];
-  
+
   if (!search) {
     results = driver;
   } else {
     results = driver.filter((dato) =>
-    dato.apelnomb.toLowerCase().includes(search.toLocaleLowerCase())
+      dato.apelnomb.toLowerCase().includes(search.toLocaleLowerCase())
     );
   }
-  
+
   const exportToExcel = (e) => {
     e.preventDefault();
     const worksheet = XLSX.utils.json_to_sheet(results || driver);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Choferes');
-    XLSX.writeFile(workbook, 'choferes.xlsx');
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Choferes");
+    XLSX.writeFile(workbook, "choferes.xlsx");
   };
-  
+
   useEffect(() => {
     handleFetchChoferes();
   }, []);
@@ -73,7 +72,6 @@ const Choferes = () => {
           backgroundColor: "#e6e6e6",
         }}
       >
-        
         <div className="w-25">
           {" "}
           <input
@@ -85,7 +83,7 @@ const Choferes = () => {
           />
         </div>
         <div>
-        <button onClick={exportToExcel} >Exportar esta lista a Excel</button>
+          <button onClick={exportToExcel}>Exportar esta lista a Excel</button>
         </div>
       </form>
 

@@ -21,15 +21,12 @@ const initialForm = {
   dateLicConducir: "",
   dateCredPuerto: "",
   apelnomb: "",
-  nomb_empresa:"",
-  nombrecorto:"",
-  id_chofer:"",
-  id_empresa:"",
-  nombre:"",
-  activo:"",
-
-
-
+  nomb_empresa: "",
+  nombrecorto: "",
+  id_chofer: "",
+  id_empresa: "",
+  nombre: "",
+  activo: "",
 };
 
 const CrearChoferes = () => {
@@ -64,7 +61,7 @@ const CrearChoferes = () => {
 
       if (api_response.status === 200) {
         const { data } = api_response;
-       // console.log(data);
+        // console.log(data);
       }
       setSending(false);
       setSent(true);
@@ -78,7 +75,7 @@ const CrearChoferes = () => {
     try {
       const api_response = await getProvincias();
       if (api_response.status === 200) {
-        console.log(api_response.data);
+        //  console.log(api_response.data);
         setProvincias([...api_response.data]);
       }
     } catch (error) {
@@ -90,7 +87,7 @@ const CrearChoferes = () => {
     try {
       const api_response = await getLocalidades(id_provincia);
       if (api_response.status === 200) {
-       // console.log(api_response.data);
+        // console.log(api_response.data);
         setLocalidades([...api_response.data]);
       }
     } catch (error) {
@@ -171,7 +168,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.nombrecorto}
               />
-              {errors.nombrecorto && <p className="text-danger">{errors.nombrecorto}</p>}
+              {errors.nombrecorto && (
+                <p className="text-danger">{errors.nombrecorto}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Nombre Empresa:</label>
@@ -183,7 +182,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.nomb_empresa}
               />
-              {errors.nomb_empresa && <p className="text-danger">{errors.nomb_empresa}</p>}
+              {errors.nomb_empresa && (
+                <p className="text-danger">{errors.nomb_empresa}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Direccion:</label>
@@ -209,9 +210,7 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.nombre}
               />
-              {errors.nombre && (
-                <p className="text-danger">{errors.nombre}</p>
-              )}
+              {errors.nombre && <p className="text-danger">{errors.nombre}</p>}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Revisacion Medica:</label>
@@ -382,7 +381,11 @@ const CrearChoferes = () => {
               >
                 {provincias.length > 0
                   ? provincias.map((p) => {
-                      return <option key={p.id} value={p.id}>{p.nombrecorto}</option>;
+                      return (
+                        <option key={p.id} value={p.id}>
+                          {p.nombrecorto}
+                        </option>
+                      );
                     })
                   : null}
               </select>
@@ -392,9 +395,9 @@ const CrearChoferes = () => {
               <div className="form-group col-md-6 mb-3 ">
                 <label htmlFor="state">Localidades</label>
                 <select
-                type="number"
-                name="idLocalidad"
-                value={form.idLocalidad}
+                  type="number"
+                  name="idLocalidad"
+                  value={form.idLocalidad}
                   className="custom-select d-block w-100"
                   onClick={(e) => handleChange1(e, "l")}
                   onChange={handleChange}
@@ -402,7 +405,7 @@ const CrearChoferes = () => {
                   {localidades.length > 0
                     ? localidades.map((l) => {
                         return (
-                          <option  value={l.id} key={l.id}>
+                          <option value={l.id} key={l.id}>
                             {l.nombre}
                           </option>
                         );

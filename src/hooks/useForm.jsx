@@ -32,14 +32,8 @@ export const useForm = (initialForm, validateForm) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setErrors(validateForm(form)); // SI NO HAY ERRORES EN EL STADO ERRORS...
-
-    if (Object.keys(errors).length === 0) {
-      alert("enviando formulario");
-    } else {
-      return;
-    }
   };
   return {
     form,

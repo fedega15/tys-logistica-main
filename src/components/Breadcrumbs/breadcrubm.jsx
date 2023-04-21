@@ -12,15 +12,15 @@ const Breadcrumbs = () => {
   const hideLogin3 = currentPath === "/Registro";
 
   return (
-    <Breadcrumb className="p-0"
+    <Breadcrumb
+      className="p-0"
       style={{
-        
         backgroundColor: "#198754",
         display: "flex",
         alignItems: "center",
         height: "100%",
-        padding:"0px",
-        gap:"0px",
+        padding: "0px",
+        gap: "0px",
       }}
     >
       {!hideLogin && (
@@ -31,7 +31,7 @@ const Breadcrumbs = () => {
           }`}
           style={{ textDecoration: "none" }}
         >
-           Iniciar sesión
+          Iniciar sesión
         </Link>
       )}
       {!hideLogin && (
@@ -42,7 +42,7 @@ const Breadcrumbs = () => {
           }`}
           style={{ textDecoration: "none" }}
         >
-          /  Registro
+          / Registro
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
@@ -53,20 +53,18 @@ const Breadcrumbs = () => {
           }`}
           style={{ textDecoration: "none" }}
         >
-         Lista de vehiculos
+          Lista de vehiculos
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
         <Link
           to="/AgregarCamiones"
           className={`breadcrumb-item ${
-            currentPath === "/AgregarCamiones"
-              ? "text-white-50"
-              : "text-light"
+            currentPath === "/AgregarCamiones" ? "text-white-50" : "text-light"
           }`}
           style={{ textDecoration: "none" }}
         >
-        / Crear vehiculo
+          / Crear vehiculo
         </Link>
       )}
       {!hideLogin2 && !hideLogin3 && (
@@ -88,7 +86,7 @@ const Breadcrumbs = () => {
           }`}
           style={{ textDecoration: "none" }}
         >
-         / Crear chofer
+          / Crear chofer
         </Link>
       )}
     </Breadcrumb>
