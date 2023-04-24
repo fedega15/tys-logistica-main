@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
+import validateVehiculo from "../../components/validateVehiculo";
 
 const initialForm = {
   tipo: "",
@@ -16,40 +17,13 @@ const initialForm = {
   id: "",
 };
 
-const vaildateForm = (form) => {
-  let errors = {};
-
-  if (!form.patente.trim()) {
-    errors.patente = "la patente es requerido";
-  } else if (String(form.patente).trim().length < 5) {
-    errors.patente = "El campo debe ser mayor 5 caracteres";
-  }
-  if (!form.numMotor.trim()) {
-    errors.numMotor = "el numero de motor es requerido";
-  } else if (String(form.numMotor).trim().length < 3) {
-    errors.numMotor = "El campo debe ser mayor 5 caracteres";
-  }
-  if (!form.numChasis.trim()) {
-    errors.numChasis = "el numero de chasis es requerido";
-  } else if (String(form.numChasis).trim().length < 5) {
-    errors.numChasis = "El campo debe ser mayor 5 caracteres";
-  }
-  if (!form.numMovil) {
-    errors.numMovil = "el numero de movil es requerido"; // este debe ser un numero acomodar preg a fede.
-  } else if (form.numMovil.length < 5) {
-    errors.numMovil = "El campo debe ser mayor 5 caracteres";
-  }
-  return errors;
-};
-
 const AgregarModificarCamiones = () => {
   const { state: paramVehicle } = useLocation(); // obteng el objeto state pasado como parámetro se asigna a paramVehicle el valor de state
   // console.log(paramVehicle);
   const [vehicle, setVehicle] = useState(paramVehicle || initialForm); // estado vehicle que se inicializa con el valor de paramVehicle si hay, sino se utiliza el valor de initialForm
   const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
     vehicle,
-    vaildateForm
-  );
+    validateVehiculo);
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);

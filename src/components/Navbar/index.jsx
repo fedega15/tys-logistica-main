@@ -4,16 +4,26 @@ import { Link, useLocation } from "react-router-dom";
 import { RiLoginBoxFill } from "react-icons/ri";
 import { BsFillPersonPlusFill, BsPlusSquareFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
+import { useState } from "react";
 
 const Navbar1 = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const showLoginAndRegisterLinks =
     location.pathname === "/login" || location.pathname === "/Registro";
-
+  const handleClick = () => {
+    setIsOpen(false);
+  };
   return (
     <>
       {[false].map((expand) => (
-        <Navbar key={expand} bg="light" expand={expand}>
+        <Navbar
+          onToggle={() => setIsOpen(!isOpen)}
+          expanded={isOpen}
+          key={expand}
+          bg="light"
+          expand={expand}
+        >
           <Container fluid style={{ height: "70px" }}>
             <Navbar.Brand
               className="d-flex justify-content-center"
@@ -56,6 +66,7 @@ const Navbar1 = () => {
                   {showLoginAndRegisterLinks && (
                     <>
                       <Link
+                        onClick={() => setIsOpen(false)}
                         className=" text-dark fw-bolder border-bottom border-secondary border-top p-2 pb-4"
                         to="/login"
                         style={{ textDecoration: "none" }}
@@ -63,17 +74,20 @@ const Navbar1 = () => {
                         <RiLoginBoxFill className="text-dark" /> Inicia sesión
                       </Link>
                       <Link
+                        onClick={() => setIsOpen(false)}
                         className="text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/Registro"
                         style={{ textDecoration: "none" }}
                       >
-                        <BsFillPersonPlusFill  className="text-secondary"/> Registro
+                        <BsFillPersonPlusFill className="text-secondary" />{" "}
+                        Registro
                       </Link>
                     </>
                   )}
                   {!showLoginAndRegisterLinks && (
                     <>
                       <Link
+                        onClick={() => setIsOpen(false)}
                         className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/"
                         style={{ textDecoration: "none" }}
@@ -81,26 +95,31 @@ const Navbar1 = () => {
                         <FaListAlt className="text-secondary" /> Vehiculos
                       </Link>
                       <Link
+                        onClick={() => setIsOpen(false)}
                         className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/Choferes"
                         style={{ textDecoration: "none" }}
                       >
-                        <FaListAlt className="text-secondary"/> Choferes
+                        <FaListAlt className="text-secondary" /> Choferes
                       </Link>
-                      
+
                       <Link
+                        onClick={() => setIsOpen(false)}
                         className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/AgregarCamiones"
                         style={{ textDecoration: "none" }}
                       >
-                        <BsPlusSquareFill  className="text-secondary" /> Crear vehiculo
+                        <BsPlusSquareFill className="text-secondary" /> Crear
+                        vehiculo
                       </Link>
                       <Link
+                        onClick={() => setIsOpen(false)}
                         className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
                         to="/Crearchofer"
                         style={{ textDecoration: "none" }}
                       >
-                        <BsFillPersonPlusFill className="text-secondary"/> Crear chofer
+                        <BsFillPersonPlusFill className="text-secondary" />{" "}
+                        Crear chofer
                       </Link>
                     </>
                   )}
