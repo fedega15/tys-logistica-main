@@ -21,7 +21,7 @@ const AgregarModificarCamiones = () => {
   const { state: paramVehicle } = useLocation(); // obteng el objeto state pasado como parámetro se asigna a paramVehicle el valor de state
   // console.log(paramVehicle);
   const [vehicle, setVehicle] = useState(paramVehicle || initialForm); // estado vehicle que se inicializa con el valor de paramVehicle si hay, sino se utiliza el valor de initialForm
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
+  const { form, errors, handleChange, handleBlur, handleSubmit,shouldShowErrors } = useForm(
     vehicle,
     validateVehiculo);
 
@@ -88,9 +88,9 @@ const AgregarModificarCamiones = () => {
                 onBlur={handleBlur}
                 value={form.patente}
               />
-              {errors.patente && (
-                <p className="text-danger">{errors.patente}</p>
-              )}
+              {shouldShowErrors("patente") && (
+            <p className="text-danger">{errors.patente}</p>
+          )}
             </div>
 
             <div className="form-group col-md-6 mb-3">
@@ -103,9 +103,9 @@ const AgregarModificarCamiones = () => {
                 onBlur={handleBlur}
                 value={form.numChasis}
               />
-              {errors.numChasis && (
-                <p className="text-danger">{errors.numChasis}</p>
-              )}
+               {shouldShowErrors("numChasis") && (
+            <p className="text-danger">{errors.numChasis}</p>
+          )}
             </div>
 
             <div className="form-group col-md-6 mb-3 ">
@@ -118,9 +118,9 @@ const AgregarModificarCamiones = () => {
                 onBlur={handleBlur}
                 value={form.numMotor}
               />
-              {errors.numMotor && (
-                <p className="text-danger">{errors.numMotor}</p>
-              )}
+               {shouldShowErrors("numMotor") && (
+            <p className="text-danger">{errors.numMotor}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">Numero movil</label>
@@ -132,9 +132,9 @@ const AgregarModificarCamiones = () => {
                 onBlur={handleBlur}
                 value={form.numMovil}
               />
-              {errors.numMovil && (
-                <p className="text-danger">{errors.numMovil}</p>
-              )}
+              {shouldShowErrors("numMovil") && (
+            <p className="text-danger">{errors.numMovil}</p>
+          )}
             </div>
           </div>
 
@@ -152,24 +152,6 @@ const AgregarModificarCamiones = () => {
                 <option value="">Opciones...</option>
                 <option value={1}>Camion</option>
                 <option value={2}>Acoplado</option>
-                <option value={3}>Camion + Acoplado</option>
-              </select>
-            </div>
-
-            <div className="form-group col-md-6 mb-3 color">
-              <label htmlFor="state">Id</label>
-              <select
-                className="custom-select d-block w-100"
-                type="number"
-                id="id"
-                name="id"
-                onChange={handleChange}
-                value={form.id}
-              >
-                <option value="">Opciones...</option>
-                <option value={1}>1</option>
-                <option value={2}>2 </option>
-                <option value={3}>3</option>
               </select>
             </div>
           </div>

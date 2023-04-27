@@ -30,7 +30,7 @@ const initialForm = {
 };
 
 const CrearChoferes = () => {
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
+  const { form, errors, handleChange, handleBlur, handleSubmit,shouldShowErrors } = useForm(
     initialForm,
     validateForm
   );
@@ -128,9 +128,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.apelnomb}
               />
-              {errors.apelnomb && (
-                <p className="text-danger">{errors.apelnomb}</p>
-              )}
+              {shouldShowErrors("apelnomb") && (
+            <p className="text-danger">{errors.apelnomb}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Razon Social:</label>
@@ -142,9 +142,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.razonSocial}
               />
-              {errors.razonSocial && (
-                <p className="text-danger">{errors.razonSocial}</p>
-              )}
+              {shouldShowErrors("razonSocial") && (
+            <p className="text-danger">{errors.razonSocial}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Correo:</label>
@@ -156,7 +156,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.correo}
               />
-              {errors.correo && <p className="text-danger">{errors.correo}</p>}
+              {shouldShowErrors("correo") && (
+            <p className="text-danger">{errors.correo}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Provincia:</label>
@@ -168,9 +170,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.nombrecorto}
               />
-              {errors.nombrecorto && (
-                <p className="text-danger">{errors.nombrecorto}</p>
-              )}
+             {shouldShowErrors("nombrecorto") && (
+            <p className="text-danger">{errors.nombrecorto}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Nombre Empresa:</label>
@@ -182,9 +184,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.nomb_empresa}
               />
-              {errors.nomb_empresa && (
-                <p className="text-danger">{errors.nomb_empresa}</p>
-              )}
+              {shouldShowErrors("nomb_empresa") && (
+            <p className="text-danger">{errors.nomb_empresa}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Direccion:</label>
@@ -196,9 +198,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.direccion}
               />
-              {errors.direccion && (
-                <p className="text-danger">{errors.direccion}</p>
-              )}
+               {shouldShowErrors("direccion") && (
+            <p className="text-danger">{errors.direccion}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Nombre:</label>
@@ -210,7 +212,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.nombre}
               />
-              {errors.nombre && <p className="text-danger">{errors.nombre}</p>}
+              {shouldShowErrors("nombre") && (
+            <p className="text-danger">{errors.nombre}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Revisacion Medica:</label>
@@ -222,9 +226,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateRevMedica}
               />
-              {errors.dateRevMedica && (
-                <p className="text-danger">{errors.dateRevMedica}</p>
-              )}
+               {shouldShowErrors("dateRevMedica") && (
+            <p className="text-danger">{errors.dateRevMedica}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Credencial Puerto:</label>
@@ -236,9 +240,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateCredPuerto}
               />
-              {errors.dateCredPuerto && (
-                <p className="text-danger">{errors.dateCredPuerto}</p>
-              )}
+               {shouldShowErrors("dateCredPuerto") && (
+            <p className="text-danger">{errors.dateCredPuerto}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Licencia de Conducir:</label>
@@ -250,9 +254,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateLicConducir}
               />
-              {errors.dateLicConducir && (
-                <p className="text-danger">{errors.dateLicConducir}</p>
-              )}
+               {shouldShowErrors("dateLicConducir") && (
+            <p className="text-danger">{errors.dateLicConducir}</p>
+          )}
             </div>
 
             <div className="form-group col-md-6 mb-3">
@@ -265,9 +269,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateCargaPeligrosa}
               />
-              {errors.dateCargaPeligrosa && (
-                <p className="text-danger">{errors.dateCargaPeligrosa}</p>
-              )}
+               {shouldShowErrors("dateCargaPeligrosa") && (
+            <p className="text-danger">{errors.dateCargaPeligrosa}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="lastname">Carga General:</label>
@@ -279,9 +283,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateCargaGral}
               />
-              {errors.dateCargaGral && (
-                <p className="text-danger">{errors.dateCargaGral}</p>
-              )}
+              {shouldShowErrors("dateCargaGral") && (
+            <p className="text-danger">{errors.dateCargaGral}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="lastname">Numero de cuil:</label>
@@ -293,7 +297,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.cuil}
               />
-              {errors.cuil && <p className="text-danger">{errors.cuil}</p>}
+              {shouldShowErrors("cuil") && (
+            <p className="text-danger">{errors.cuil}</p>
+          )}
             </div>
 
             <div className="form-group col-md-6 mb-3 ">
@@ -306,9 +312,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.telefono}
               />
-              {errors.telefono && (
-                <p className="text-danger">{errors.telefono}</p>
-              )}
+               {shouldShowErrors("telefono") && (
+            <p className="text-danger">{errors.telefono}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">Codigo Postal:</label>
@@ -320,9 +326,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.codigopostal}
               />
-              {errors.codigopostal && (
-                <p className="text-danger">{errors.codigopostal}</p>
-              )}
+              {shouldShowErrors("codigopostal") && (
+            <p className="text-danger">{errors.codigopostal}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">ID del chofer:</label>
@@ -334,9 +340,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.id_chofer}
               />
-              {errors.id_chofer && (
-                <p className="text-danger">{errors.id_chofer}</p>
-              )}
+              {shouldShowErrors("id_chofer") && (
+            <p className="text-danger">{errors.id_chofer}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">ID la empresa:</label>
@@ -348,9 +354,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.id_empresa}
               />
-              {errors.id_empresa && (
-                <p className="text-danger">{errors.id_empresa}</p>
-              )}
+              {shouldShowErrors("id_empresa") && (
+            <p className="text-danger">{errors.id_empresa}</p>
+          )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">ID la razonsocial:</label>
@@ -362,9 +368,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.id_razonsocial}
               />
-              {errors.id_razonsocial && (
-                <p className="text-danger">{errors.id_razonsocial}</p>
-              )}
+              {shouldShowErrors("id_razonsocial") && (
+            <p className="text-danger">{errors.id_razonsocial}</p>
+          )}
             </div>
           </div>
 

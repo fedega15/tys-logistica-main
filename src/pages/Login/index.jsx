@@ -30,7 +30,7 @@ const ContactForm = () => {
   const navigate = useNavigate();
 
   const [Loading, setLoading] = useState(false);
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
+  const { form, errors, handleChange, handleBlur,shouldShowErrors , handleSubmit } = useForm(
     initialForm,
     vaildateForm
   );
@@ -64,39 +64,6 @@ const ContactForm = () => {
       setLoading(false);
     }
   };
-  /*
-  const handleFetch = async (e) => {
-      e.preventDefault()
-      setLoading(true)
-      
-      try {
-          if (errors.hasOwnProperty('email') || errors.hasOwnProperty('password')) {
-              //hay errores
-              console.log(errors)
-              return false
-          }
-          console.log(form)
-          //faltaba poner parametro donde se crea la func
-          const api_response = await UserLogin(form)
-          if (api_response.status === 200) {
-              const { data } = api_response
-              console.log(data)
-              const accessToken = api_response?.data?.accessToken;
-              setAuth({ email : form.email, password: form.password , accessToken}) // preguntar a fede como paso las props email y password aca.
-              setSucces(true)
-          }
-      } catch (error) {
-          console.log(error.response.data)
-          console.log(error)
-      }
-      finally {
-          setLoading(false)
-        }
-  }
-  /*useEffect (() => {
-      handleFetch()
-    },[])*/
-
   if (Loading) {
     return <>Loading..</>;
   }
@@ -119,7 +86,9 @@ const ContactForm = () => {
                   onBlur={handleBlur}
                   value={form.email}
                 />
-                {errors.email && <p className="text-danger">{errors.email}</p>}
+                 {shouldShowErrors("email") && (
+            <p className="text-danger">{errors.email}</p>
+          )}
               </div>
             </div>
             <div className="row">
@@ -133,9 +102,9 @@ const ContactForm = () => {
                   onBlur={handleBlur}
                   value={form.password}
                 />
-                {errors.password && (
-                  <p className="text-danger">{errors.password}</p>
-                )}
+                 {shouldShowErrors("password") && (
+            <p className="text-danger">{errors.password}</p>
+          )}
               </div>
             </div>
 
