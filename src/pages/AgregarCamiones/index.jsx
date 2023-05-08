@@ -19,11 +19,15 @@ const initialForm = {
 
 const AgregarModificarCamiones = () => {
   const { state: paramVehicle } = useLocation(); // obteng el objeto state pasado como parámetro se asigna a paramVehicle el valor de state
-  // console.log(paramVehicle);
   const [vehicle, setVehicle] = useState(paramVehicle || initialForm); // estado vehicle que se inicializa con el valor de paramVehicle si hay, sino se utiliza el valor de initialForm
-  const { form, errors, handleChange, handleBlur, handleSubmit,shouldShowErrors } = useForm(
-    vehicle,
-    validateVehiculo);
+  const {
+    form,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    shouldShowErrors,
+  } = useForm(vehicle, validateVehiculo);
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -39,33 +43,26 @@ const AgregarModificarCamiones = () => {
 
         if (api_response.status === 200) {
           const { data } = api_response;
-          console.log(data);
         }
       } else {
-        console.log(paramVehicle);
         api_response = await ModificarCamion(form, {
           id: paramVehicle.id,
         });
 
         if (api_response.status === 200) {
           const { data } = api_response;
-          console.log(data);
         }
       }
       setSending(false);
       setSent(true);
     } catch (error) {
-      console.log(error);
       setSending(false);
     }
   };
   useEffect(() => {
     //manejo los cambios en el estado paramVehicle. Si paramVehicle cambia, la función establece el estado vehicle en paramVehicle
     if (paramVehicle) {
-      console.log("hay parametro");
       setVehicle(paramVehicle);
-      // console.log(paramVehicle);
-      console.log(vehicle);
     } else {
       console.log("no hay parametro");
     }
@@ -89,8 +86,8 @@ const AgregarModificarCamiones = () => {
                 value={form.patente}
               />
               {shouldShowErrors("patente") && (
-            <p className="text-danger">{errors.patente}</p>
-          )}
+                <p className="text-danger">{errors.patente}</p>
+              )}
             </div>
 
             <div className="form-group col-md-6 mb-3">
@@ -103,9 +100,9 @@ const AgregarModificarCamiones = () => {
                 onBlur={handleBlur}
                 value={form.numChasis}
               />
-               {shouldShowErrors("numChasis") && (
-            <p className="text-danger">{errors.numChasis}</p>
-          )}
+              {shouldShowErrors("numChasis") && (
+                <p className="text-danger">{errors.numChasis}</p>
+              )}
             </div>
 
             <div className="form-group col-md-6 mb-3 ">
@@ -118,9 +115,9 @@ const AgregarModificarCamiones = () => {
                 onBlur={handleBlur}
                 value={form.numMotor}
               />
-               {shouldShowErrors("numMotor") && (
-            <p className="text-danger">{errors.numMotor}</p>
-          )}
+              {shouldShowErrors("numMotor") && (
+                <p className="text-danger">{errors.numMotor}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">Numero movil</label>
@@ -133,8 +130,8 @@ const AgregarModificarCamiones = () => {
                 value={form.numMovil}
               />
               {shouldShowErrors("numMovil") && (
-            <p className="text-danger">{errors.numMovil}</p>
-          )}
+                <p className="text-danger">{errors.numMovil}</p>
+              )}
             </div>
           </div>
 

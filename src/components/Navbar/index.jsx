@@ -115,7 +115,7 @@ const Navbar1 = () => {
                       <Link
                         onClick={() => setIsOpen(false)}
                         className=" text-dark fw-bolder border-bottom border-secondary p-2 pb-4"
-                        to="/Crearchofer"
+                        to="/CrearChofer"
                         style={{ textDecoration: "none" }}
                       >
                         <BsFillPersonPlusFill className="text-secondary" />{" "}

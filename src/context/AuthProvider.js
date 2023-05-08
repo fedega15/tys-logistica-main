@@ -6,16 +6,17 @@ export const AuthProvider = ({ children }) => {
     email: null,
     password: null,
     accessToken: null,
-    auth: false,
+    auth: true, // solo cambie esto preguntar a fede
   });
   const verifyToken = async () => {
     try {
       const { data } = await customAxiosPrivate.get("/api/user/verifyuser");
-      console.log(data)
-      const { loginStatus,/* userName,  userNavBar*/ } = data;
-      console.log(loginStatus)
+      const { loginStatus /* userName,  userNavBar*/ } = data;
       if (loginStatus) {
-        const token = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+        const token = document.cookie.replace(
+          /(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/,
+          "$1"
+        );
         setAuth({
           email: null,
           password: null,
@@ -40,7 +41,6 @@ export const AuthProvider = ({ children }) => {
       });
     }
   };
-  console.log(auth)
   useEffect(() => {
     verifyToken();
   }, []);

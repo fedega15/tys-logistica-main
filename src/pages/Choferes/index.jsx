@@ -4,12 +4,15 @@ import { getChofer } from "../../api/Model/Chofer";
 import { handleFetchError } from "../../utils/errorhandler";
 import { Chofer } from "../../components/Chofer";
 import * as XLSX from "xlsx";
+import { useNavigate } from "react-router-dom";
 
 const Choferes = () => {
   const [Loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [driver, setDriver] = useState([]);
   const [search, setSearch] = useState("");
+
+  const navigate = useNavigate();
 
   const handleFetchChoferes = async () => {
     setLoading(true);
@@ -63,6 +66,11 @@ const Choferes = () => {
   if (error) {
     return <>{error}</>;
   }
+  
+  const HandleModificar = (driver) => {
+    // console.log(vehicle);
+    navigate("/CrearChofer", { state: driver });
+  };
 
   return (
     <div>
@@ -91,8 +99,18 @@ const Choferes = () => {
         {results.map((driver, index) => (
           <Accordion.Item eventKey={index} key={`driver-${driver.id_chofer}`}>
             <Accordion.Header>
+              <div>
               {" "}
               <h5 className="fw-semibold">CHOFER {driver.nombre} </h5>
+              </div>
+              <div className="d-flex justify-content-center justify-content-lg-end">
+                <span
+                  onClick={() => HandleModificar(driver)}
+                  className="btn btn-secondary m-3  "
+                >
+                  Modificar
+                </span>
+              </div>
             </Accordion.Header>
             <Accordion.Body className="bg-green">
               <Chofer key={`driver-${driver.id_chofer}`} {...driver} />

@@ -12,7 +12,7 @@ const initialForm = {
   cuil: "",
   direccion: "",
   idLocalidad: "",
-  codigopostal: "",
+  codigoPostal: "",
   telefono: "",
   correo: "",
   dateRevMedica: "",
@@ -21,12 +21,8 @@ const initialForm = {
   dateLicConducir: "",
   dateCredPuerto: "",
   apelnomb: "",
-  nomb_empresa: "",
-  nombrecorto: "",
-  id_chofer: "",
-  id_empresa: "",
-  nombre: "",
-  activo: "",
+ 
+
 };
 
 const CrearChoferes = () => {
@@ -161,34 +157,6 @@ const CrearChoferes = () => {
           )}
             </div>
             <div className="form-group col-md-6 mb-3">
-              <label htmlFor="firstname">Provincia:</label>
-              <input
-                type="text"
-                name="nombrecorto"
-                placeholder="gustavo witz"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.nombrecorto}
-              />
-             {shouldShowErrors("nombrecorto") && (
-            <p className="text-danger">{errors.nombrecorto}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="firstname">Nombre Empresa:</label>
-              <input
-                type="text"
-                name="nomb_empresa"
-                placeholder="gustavo witz"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.nomb_empresa}
-              />
-              {shouldShowErrors("nomb_empresa") && (
-            <p className="text-danger">{errors.nomb_empresa}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Direccion:</label>
               <input
                 type="text"
@@ -200,20 +168,6 @@ const CrearChoferes = () => {
               />
                {shouldShowErrors("direccion") && (
             <p className="text-danger">{errors.direccion}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="firstname">Nombre:</label>
-              <input
-                type="text"
-                name="nombre"
-                placeholder="gustavo witz"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.nombre}
-              />
-              {shouldShowErrors("nombre") && (
-            <p className="text-danger">{errors.nombre}</p>
           )}
             </div>
             <div className="form-group col-md-6 mb-3">
@@ -290,7 +244,7 @@ const CrearChoferes = () => {
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="lastname">Numero de cuil:</label>
               <input
-                type="number"
+                type="text"
                 name="cuil"
                 placeholder="20-40454618-0"
                 onChange={handleChange}
@@ -320,56 +274,14 @@ const CrearChoferes = () => {
               <label htmlFor="email">Codigo Postal:</label>
               <input
                 type="number"
-                name="codigopostal"
+                name="codigoPostal"
                 placeholder="2000"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={form.codigopostal}
+                value={form.codigoPostal}
               />
-              {shouldShowErrors("codigopostal") && (
-            <p className="text-danger">{errors.codigopostal}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="email">ID del chofer:</label>
-              <input
-                type="number"
-                name="id_chofer"
-                placeholder="2000"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.id_chofer}
-              />
-              {shouldShowErrors("id_chofer") && (
-            <p className="text-danger">{errors.id_chofer}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="email">ID la empresa:</label>
-              <input
-                type="number"
-                name="id_empresa"
-                placeholder="2000"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.id_empresa}
-              />
-              {shouldShowErrors("id_empresa") && (
-            <p className="text-danger">{errors.id_empresa}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="email">ID la razonsocial:</label>
-              <input
-                type="number"
-                name="id_razonsocial"
-                placeholder="2000"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.id_razonsocial}
-              />
-              {shouldShowErrors("id_razonsocial") && (
-            <p className="text-danger">{errors.id_razonsocial}</p>
+              {shouldShowErrors("codigoPostal") && (
+            <p className="text-danger">{errors.codigoPostal}</p>
           )}
             </div>
           </div>
@@ -434,9 +346,9 @@ const CrearChoferes = () => {
               Tu vehiculo se añadio a :
               <Link
                 className="fw-bolder border-bottom border-secondary p-2 pb-4"
-                to="/"
+                to="/Choferes"
               >
-                Lista camiones
+              Choferes
               </Link>
             </p>
           )}

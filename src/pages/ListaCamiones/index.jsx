@@ -4,6 +4,7 @@ import { getVehicles } from "../../api/Model/Vehicle";
 import { handleFetchError } from "../../utils/errorhandler";
 import { Vehicle } from "../../components/Vehicle";
 import { useNavigate } from "react-router-dom";
+import * as XLSX from "xlsx";
 
 const ListaCamiones1 = () => {
   const [Loading, setLoading] = useState(false);
@@ -45,6 +46,13 @@ const ListaCamiones1 = () => {
     );
   }
 
+  const exportToExcel = (e) => {
+    e.preventDefault();
+    const worksheet = XLSX.utils.json_to_sheet(results || vehicles);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "vehiculos");
+    XLSX.writeFile(workbook, "vehiculos.xlsx");
+  };
   useEffect(() => {
     handleFetchVehicles();
   }, []);
@@ -79,6 +87,9 @@ const ListaCamiones1 = () => {
             type="text"
           />
         </div>
+        <div>
+          <button onClick={exportToExcel}>Exportar esta lista a Excel</button>
+        </div>
       </form>
 
       <Accordion defaultActiveKey={["0"]} alwaysOpen>
@@ -91,16 +102,13 @@ const ListaCamiones1 = () => {
                   VEHICULO {vehicle.id}{" "}
                 </h5>
               </div>
-              <div
-                className=" position-absolute top-0   "
-                style={{ paddingLeft: "1150px" }}
-              >
-                <button
+              <div className="d-flex justify-content-center justify-content-lg-end">
+                <span
                   onClick={() => HandleModificar(vehicle)}
-                  className="btn btn-secondary m-3 end-0"
+                  className="btn btn-secondary m-3  "
                 >
                   Modificar
-                </button>
+                </span>
               </div>
             </Accordion.Header>
             <Accordion.Body className="bg-green">
