@@ -41,7 +41,7 @@ const validateForm = (form) => {
   } else if (form.cuil.length < 5) {
     errors.cuil = "El campo debe ser mayor 5 caracteres";
   }
-  if (!form.dateCredPuert) {
+  if (!form.dateCredPuerto) {
     errors.dateCredPuerto = "la credencial del puerto es requerida";
   } else if (form.dateCredPuerto.length < 5) {
     errors.dateCredPuerto = "El campo debe ser mayor 5 caracteres";

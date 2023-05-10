@@ -136,11 +136,11 @@ const AgregarModificarCamiones = () => {
           </div>
 
           <div className="row">
-            <div className="form-group col-md-6 mb-3">
+            <div className="form-group col-md-3 mb-3">
               <label htmlFor="country">Tipo</label>
               <select
                 type="number"
-                className="custom-select d-block w-100"
+                className="btn btn-light border custom-select d-block w-100"
                 id="tipo"
                 name="tipo"
                 onChange={handleChange}

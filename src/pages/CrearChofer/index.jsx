@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import { CrearChofer } from "../../api/Model/Chofer";
 import validateForm from "../../components/validateForm";
 import { getProvincias, getLocalidades } from "../../api/Model/Localidades";
+import { getRazonsocial } from "../../api/Model/Razonsocial";
 
 const initialForm = {
-  razonSocial: "",
+  id_razonsocial: "",
   cuil: "",
   direccion: "",
   idLocalidad: "",
@@ -21,15 +22,17 @@ const initialForm = {
   dateLicConducir: "",
   dateCredPuerto: "",
   apelnomb: "",
- 
-
 };
 
 const CrearChoferes = () => {
-  const { form, errors, handleChange, handleBlur, handleSubmit,shouldShowErrors } = useForm(
-    initialForm,
-    validateForm
-  );
+  const {
+    form,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    shouldShowErrors,
+  } = useForm(initialForm, validateForm);
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -37,12 +40,13 @@ const CrearChoferes = () => {
   const [localidades, setLocalidades] = useState([]);
   const [localidad, setLocalidad] = useState();
   const [provincia, setProvincia] = useState();
+  const [razonsocial, setRazonsocial] = useState([]);
 
   const handleFetch = async (e) => {
     try {
       e.preventDefault();
       if (
-        errors.hasOwnProperty("razonSocial") ||
+        errors.hasOwnProperty("razonsocial") ||
         errors.hasOwnProperty("cuil") ||
         errors.hasOwnProperty("telefono") ||
         errors.hasOwnProperty("codigoPostal")
@@ -91,6 +95,16 @@ const CrearChoferes = () => {
     }
   };
 
+  const handleFetchRazonsocial = async (id_razonsocial) => {
+    try {
+      const api_response = await getRazonsocial(id_razonsocial);
+      if (api_response.status === 200) {
+        setRazonsocial([...api_response.data]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleChange1 = (e, target) => {
     const { value } = e.target;
     if (target === "p") {
@@ -102,8 +116,11 @@ const CrearChoferes = () => {
   };
 
   useEffect(() => {
+    handleFetchRazonsocial();
     handleFetchProvincias();
   }, []);
+
+  useEffect(() => {}, [razonsocial]);
 
   // console.log(`Provincias: ${provincia}`);
   //    console.log(`localidad: ${localidad}`);
@@ -125,22 +142,8 @@ const CrearChoferes = () => {
                 value={form.apelnomb}
               />
               {shouldShowErrors("apelnomb") && (
-            <p className="text-danger">{errors.apelnomb}</p>
-          )}
-            </div>
-            <div className="form-group col-md-6 mb-3">
-              <label htmlFor="firstname">Razon Social:</label>
-              <input
-                type="text"
-                name="razonSocial"
-                placeholder="s.a sa"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={form.razonSocial}
-              />
-              {shouldShowErrors("razonSocial") && (
-            <p className="text-danger">{errors.razonSocial}</p>
-          )}
+                <p className="text-danger">{errors.apelnomb}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Correo:</label>
@@ -153,8 +156,8 @@ const CrearChoferes = () => {
                 value={form.correo}
               />
               {shouldShowErrors("correo") && (
-            <p className="text-danger">{errors.correo}</p>
-          )}
+                <p className="text-danger">{errors.correo}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Direccion:</label>
@@ -166,9 +169,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.direccion}
               />
-               {shouldShowErrors("direccion") && (
-            <p className="text-danger">{errors.direccion}</p>
-          )}
+              {shouldShowErrors("direccion") && (
+                <p className="text-danger">{errors.direccion}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Revisacion Medica:</label>
@@ -180,9 +183,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateRevMedica}
               />
-               {shouldShowErrors("dateRevMedica") && (
-            <p className="text-danger">{errors.dateRevMedica}</p>
-          )}
+              {shouldShowErrors("dateRevMedica") && (
+                <p className="text-danger">{errors.dateRevMedica}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Credencial Puerto:</label>
@@ -194,9 +197,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateCredPuerto}
               />
-               {shouldShowErrors("dateCredPuerto") && (
-            <p className="text-danger">{errors.dateCredPuerto}</p>
-          )}
+              {shouldShowErrors("dateCredPuerto") && (
+                <p className="text-danger">{errors.dateCredPuerto}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="firstname">Licencia de Conducir:</label>
@@ -208,9 +211,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateLicConducir}
               />
-               {shouldShowErrors("dateLicConducir") && (
-            <p className="text-danger">{errors.dateLicConducir}</p>
-          )}
+              {shouldShowErrors("dateLicConducir") && (
+                <p className="text-danger">{errors.dateLicConducir}</p>
+              )}
             </div>
 
             <div className="form-group col-md-6 mb-3">
@@ -223,9 +226,9 @@ const CrearChoferes = () => {
                 onBlur={handleBlur}
                 value={form.dateCargaPeligrosa}
               />
-               {shouldShowErrors("dateCargaPeligrosa") && (
-            <p className="text-danger">{errors.dateCargaPeligrosa}</p>
-          )}
+              {shouldShowErrors("dateCargaPeligrosa") && (
+                <p className="text-danger">{errors.dateCargaPeligrosa}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="lastname">Carga General:</label>
@@ -238,8 +241,8 @@ const CrearChoferes = () => {
                 value={form.dateCargaGral}
               />
               {shouldShowErrors("dateCargaGral") && (
-            <p className="text-danger">{errors.dateCargaGral}</p>
-          )}
+                <p className="text-danger">{errors.dateCargaGral}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="lastname">Numero de cuil:</label>
@@ -252,23 +255,23 @@ const CrearChoferes = () => {
                 value={form.cuil}
               />
               {shouldShowErrors("cuil") && (
-            <p className="text-danger">{errors.cuil}</p>
-          )}
+                <p className="text-danger">{errors.cuil}</p>
+              )}
             </div>
 
             <div className="form-group col-md-6 mb-3 ">
               <label htmlFor="telefono">Telefono:</label>
               <input
-                type="number"
+                type="text"
                 name="telefono"
                 placeholder="6680465"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={form.telefono}
               />
-               {shouldShowErrors("telefono") && (
-            <p className="text-danger">{errors.telefono}</p>
-          )}
+              {shouldShowErrors("telefono") && (
+                <p className="text-danger">{errors.telefono}</p>
+              )}
             </div>
             <div className="form-group col-md-6 mb-3">
               <label htmlFor="email">Codigo Postal:</label>
@@ -281,16 +284,16 @@ const CrearChoferes = () => {
                 value={form.codigoPostal}
               />
               {shouldShowErrors("codigoPostal") && (
-            <p className="text-danger">{errors.codigoPostal}</p>
-          )}
+                <p className="text-danger">{errors.codigoPostal}</p>
+              )}
             </div>
           </div>
 
           <div className="row">
-            <div className="form-group col-md-6 mb-3 ">
+            <div className="form-group col-md-4 mb-3 ">
               <label htmlFor="state">Provincia</label>
               <select
-                className="custom-select d-block w-100"
+                className="btn btn-light border custom-select d-block w-100"
                 type="number"
                 name="idLocalidad"
                 value={form.idLocalidad}
@@ -310,13 +313,13 @@ const CrearChoferes = () => {
             </div>
 
             {!provincia ? null : (
-              <div className="form-group col-md-6 mb-3 ">
+              <div className="form-group col-md-5 mb-3 ">
                 <label htmlFor="state">Localidades</label>
                 <select
                   type="number"
                   name="idLocalidad"
                   value={form.idLocalidad}
-                  className="custom-select d-block w-100"
+                  className="btn btn-light border custom-select d-block w-75"
                   onClick={(e) => handleChange1(e, "l")}
                   onChange={handleChange}
                 >
@@ -333,6 +336,27 @@ const CrearChoferes = () => {
               </div>
             )}
           </div>
+          <div className="form-group col-md-4 mb-3 ">
+            <label htmlFor="state">Razon Social</label>
+            <select
+              className="btn btn-light border custom-select d-block w-75"
+              type="number"
+              name="id_razonsocial"
+              value={form.id_razonsocial}
+              onChange={handleChange}
+              onClick={(e) => handleChange1(e, "r")}
+            >
+              {razonsocial.length > 0
+                ? razonsocial.map((r) => {
+                    return (
+                      <option key={r.id} value={r.id}>
+                        {r.nomb_empresa}
+                      </option>
+                    );
+                  })
+                : null}
+            </select>
+          </div>
 
           <div className="form-group">
             <button onClick={handleFetch} disabled={sending || sent}>
@@ -348,7 +372,7 @@ const CrearChoferes = () => {
                 className="fw-bolder border-bottom border-secondary p-2 pb-4"
                 to="/Choferes"
               >
-              Choferes
+                Choferes
               </Link>
             </p>
           )}

@@ -8,3 +8,4 @@ export const urlGetChofer = "/api/driver";
 export const urlGetLocalidades = "/api/locations/localidades/";
 export const urlGetProvincias = "/api/locations/provincias";
 export const urlGetUser = "/api/user/verifyuser"
+export const urlGetRazonsocial ="/api/companies"
