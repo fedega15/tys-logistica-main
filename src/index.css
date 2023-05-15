@@ -75,3 +75,16 @@ form button {
 }
 
 /* auth forms */
+.bg-red {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.bg-yellow {
+  background-color: #ffc107;
+}
+
+.bg-blue {
+  background-color: #007bff;
+  color: #fff;
+}

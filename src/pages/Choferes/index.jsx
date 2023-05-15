@@ -5,6 +5,8 @@ import { handleFetchError } from "../../utils/errorhandler";
 import { Chofer } from "../../components/Chofer";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
+import { parseISO, addDays, isWithinInterval } from 'date-fns';
+import './color.css'
 
 const Choferes = () => {
   const [Loading, setLoading] = useState(false);
@@ -96,8 +98,24 @@ const Choferes = () => {
       </form>
 
       <Accordion defaultActiveKey={["0"]} alwaysOpen>
-        {results.map((driver, index) => (
-          <Accordion.Item eventKey={index} key={`driver-${driver.id_chofer}`}>
+        {results.map((driver, index) =>{
+          const today = new Date(); // Fecha actual
+
+          // Calcular la diferencia en días y asignar color según estado de vencimiento
+          let color = '';
+          const dateRevMedica = parseISO(driver.dateRevMedica); // Convertir la fecha de vencimiento a objeto de fecha
+          const daysDifference = Math.ceil((dateRevMedica - today) / (1000 * 60 * 60 * 24)); // Calcular la diferencia en días
+          
+          if (daysDifference < 0) {
+            color = 'red'; // Se venció
+          } else if (daysDifference <= 30) {
+            color = 'yellow'; // Próximo a vencerse (dentro de 30 días)
+          } else if (isWithinInterval(dateRevMedica, { start: today, end: addDays(today, 60) })) {
+            color = 'blue'; // Vence dentro de 2 meses
+          }
+          console.log(color)
+          return (
+          <Accordion.Item eventKey={index.toString()} key={`driver-${driver.id_chofer}`}>
             <Accordion.Header>
               <div>
               {" "}
@@ -112,11 +130,12 @@ const Choferes = () => {
                 </span>
               </div>
             </Accordion.Header>
-            <Accordion.Body className="bg-green">
+            <Accordion.Body /* className={`bg-${color}`}*/>
               <Chofer key={`driver-${driver.id_chofer}`} {...driver} />
             </Accordion.Body>
           </Accordion.Item>
-        ))}
+        )
+})}
       </Accordion>
     </div>
   );
