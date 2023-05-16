@@ -12,7 +12,7 @@ const ListaCamiones1 = () => {
   const [vehicles, setVehicles] = useState([]);
   const [search, setSearch] = useState("");
 
-  const navigate = useNavigate(); // move this hook to the top level
+  const navigate = useNavigate(); 
 
   const handleFetchVehicles = async () => {
     setLoading(true);
@@ -96,7 +96,7 @@ const ListaCamiones1 = () => {
         {results.map((vehicle, index) => (
           <Accordion.Item eventKey={index} key={index}>
             <Accordion.Header>
-              <div>
+              <div style={{ width: '400px',}}>
                 {" "}
                 <h5 className="font-italic text-dark">
                   VEHICULO {vehicle.id}{" "}
@@ -104,6 +104,7 @@ const ListaCamiones1 = () => {
               </div>
               <div className="d-flex justify-content-center justify-content-lg-end">
                 <span
+               style={{ position: 'relative', left: '1000px',}}
                   onClick={() => HandleModificar(vehicle)}
                   className="btn btn-secondary m-3  "
                 >
@@ -111,7 +112,9 @@ const ListaCamiones1 = () => {
                 </span>
               </div>
             </Accordion.Header>
-            <Accordion.Body className="bg-green">
+            <Accordion.Body  style={{
+          backgroundColor: "#e6e6e6",
+        }}className="bg-green">
               <Vehicle key={vehicle.id} {...vehicle} />
             </Accordion.Body>
           </Accordion.Item>

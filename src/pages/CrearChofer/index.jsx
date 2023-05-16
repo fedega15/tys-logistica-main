@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useForm } from "../../hooks/useForm";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CrearChofer } from "../../api/Model/Chofer";
 import validateForm from "../../components/validateForm";
 import { getProvincias, getLocalidades } from "../../api/Model/Localidades";
@@ -24,7 +24,9 @@ const initialForm = {
   apelnomb: "",
 };
 
-const CrearChoferes = () => {
+const CrearModificarChoferes = () => {
+  const { state: paramDriver } = useLocation(); // obteng el objeto state pasado como parámetro se asigna a paramVehicle el valor de state
+  const [driver, setDriver] = useState(paramDriver || initialForm); // estado vehicle que se inicializa con el valor de paramVehicle si hay, sino se utiliza el val
   const {
     form,
     errors,
@@ -32,7 +34,7 @@ const CrearChoferes = () => {
     handleBlur,
     handleSubmit,
     shouldShowErrors,
-  } = useForm(initialForm, validateForm);
+  } = useForm( driver, validateForm);
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -42,34 +44,28 @@ const CrearChoferes = () => {
   const [provincia, setProvincia] = useState();
   const [razonsocial, setRazonsocial] = useState([]);
 
-  const handleFetch = async (e) => {
+  const handleFetch = async (paramDriver) => {
     try {
-      e.preventDefault();
-      if (
-        errors.hasOwnProperty("razonsocial") ||
-        errors.hasOwnProperty("cuil") ||
-        errors.hasOwnProperty("telefono") ||
-        errors.hasOwnProperty("codigoPostal")
-      ) {
-        //hay errores
-        console.log(errors);
-        return false;
-      }
+      let api_response;
       setSending(true);
-      const api_response = await CrearChofer(form);
-      setSending(false);
-
+      
+      if (!paramDriver) {
+        api_response = await CrearChofer(form);
+        setSending(false);
+    
+       api_response = await CrearModificarChoferes(form ,  {
+        id: paramDriver.id,
+      });
       if (api_response.status === 200) {
         const { data } = api_response;
-        // console.log(data);
       }
-      setSending(false);
-      setSent(true);
-    } catch (error) {
-      console.log(error);
-      setSending(false);
     }
-  };
+    setSending(false);
+    setSent(true);
+  } catch (error) {
+    setSending(false);
+  }
+};
 
   const handleFetchProvincias = async () => {
     try {
@@ -381,4 +377,4 @@ const CrearChoferes = () => {
     </div>
   );
 };
-export default CrearChoferes;
+export default CrearModificarChoferes;

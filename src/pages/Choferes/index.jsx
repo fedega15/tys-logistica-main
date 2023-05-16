@@ -5,8 +5,6 @@ import { handleFetchError } from "../../utils/errorhandler";
 import { Chofer } from "../../components/Chofer";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
-import { parseISO, addDays, isWithinInterval } from 'date-fns';
-import './color.css'
 
 const Choferes = () => {
   const [Loading, setLoading] = useState(false);
@@ -68,9 +66,9 @@ const Choferes = () => {
   if (error) {
     return <>{error}</>;
   }
-  
+
   const HandleModificar = (driver) => {
-    // console.log(vehicle);
+     console.log(driver);
     navigate("/CrearChofer", { state: driver });
   };
 
@@ -98,44 +96,38 @@ const Choferes = () => {
       </form>
 
       <Accordion defaultActiveKey={["0"]} alwaysOpen>
-        {results.map((driver, index) =>{
-          const today = new Date(); // Fecha actual
-
-          // Calcular la diferencia en días y asignar color según estado de vencimiento
-          let color = '';
-          const dateRevMedica = parseISO(driver.dateRevMedica); // Convertir la fecha de vencimiento a objeto de fecha
-          const daysDifference = Math.ceil((dateRevMedica - today) / (1000 * 60 * 60 * 24)); // Calcular la diferencia en días
-          
-          if (daysDifference < 0) {
-            color = 'red'; // Se venció
-          } else if (daysDifference <= 30) {
-            color = 'yellow'; // Próximo a vencerse (dentro de 30 días)
-          } else if (isWithinInterval(dateRevMedica, { start: today, end: addDays(today, 60) })) {
-            color = 'blue'; // Vence dentro de 2 meses
-          }
-          console.log(color)
+        {results.map((driver, index) => {
           return (
-          <Accordion.Item eventKey={index.toString()} key={`driver-${driver.id_chofer}`}>
-            <Accordion.Header>
-              <div>
-              {" "}
-              <h5 className="fw-semibold">CHOFER {driver.nombre} </h5>
-              </div>
-              <div className="d-flex justify-content-center justify-content-lg-end">
-                <span
-                  onClick={() => HandleModificar(driver)}
-                  className="btn btn-secondary m-3  "
-                >
-                  Modificar
-                </span>
-              </div>
-            </Accordion.Header>
-            <Accordion.Body /* className={`bg-${color}`}*/>
-              <Chofer key={`driver-${driver.id_chofer}`} {...driver} />
-            </Accordion.Body>
-          </Accordion.Item>
-        )
-})}
+            <Accordion.Item
+              eventKey={index.toString()}
+              key={`driver-${driver.id_chofer}`}
+            >
+              <Accordion.Header>
+                <div style={{ width: '400px',}} >
+                  {" "}
+                  <h5 className="fw-semibold">CHOFER {driver.nombre} </h5>
+                </div>
+                <div className="d-flex justify-content-center justify-content-lg-end"
+                 style={{ left: '600px',}}>
+                  <span
+                  style={{ position: 'relative', left: '1000px',}}
+                    onClick={() => HandleModificar(driver)}
+                    className="btn btn-secondary m-3  "
+                  >
+                    Modificar
+                  </span>
+                </div>
+              </Accordion.Header>
+              <Accordion.Body
+                style={{
+                  backgroundColor: "#e6e6e6",
+                }}
+              >
+                <Chofer key={`driver-${driver.id_chofer}`} {...driver} />
+              </Accordion.Body>
+            </Accordion.Item>
+          );
+        })}
       </Accordion>
     </div>
   );

@@ -9,3 +9,4 @@ export const urlGetLocalidades = "/api/locations/localidades/";
 export const urlGetProvincias = "/api/locations/provincias";
 export const urlGetUser = "/api/user/verifyuser"
 export const urlGetRazonsocial ="/api/companies"
+export const urlModificarChofer = "/api/driver";
