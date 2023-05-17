@@ -74,28 +74,28 @@ export const Chofer = ({
     <div>
       <div>
         <h5 className="text-dark  p-2">Apellido y Nombre: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <AiTwotoneSchedule />"{apelnomb}"{" "}
         </span>
       </div>
       <div>
         <h5 className="text-dark border-top p-2">Razon Social: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <AiFillDashboard />"{id_razonsocial}"{" "}
         </span>
       </div>
       <div>
         <h5 className="text-dark border-top p-2">Correo: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <HiCog />"{correo}"{" "}
         </span>
       </div>
       <div>
         <h5 className="text-dark border-top p-2">Direccion: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           <FaTruckMoving /> "{direccion}"{" "}
         </span>
       </div>
@@ -153,28 +153,28 @@ export const Chofer = ({
       </div>
       <div className="grid-container">
         <h5 className="text-dark border-top p-2 ">Numero de Cuil: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <AiFillSecurityScan />"{cuil}"{" "}
         </span>
       </div>
       <div className="grid-container">
         <h5 className="text-dark border-top p-2 ">Codigo Postal: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <AiFillSecurityScan />"{codigopostal}"{" "}
         </span>
       </div>
       <div className="grid-container">
         <h5 className="text-dark border-top p-2 ">Telefono: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <AiFillSecurityScan />"{telefono}"{" "}
         </span>
       </div>
       <div className="grid-container">
         <h5 className="text-dark border-top p-2 ">Localidad: </h5>
-        <span className="text-muted p-2">
+        <span className=" p-2">
           {" "}
           <AiFillSecurityScan />"{idLocalidad}"{" "}
         </span>

@@ -99,20 +99,18 @@ const Choferes = () => {
         {results.map((driver, index) => {
           return (
             <Accordion.Item
-              eventKey={index.toString()}
-              key={`driver-${driver.id_chofer}`}
+              eventKey={index}
+              key={index}
             >
-              <Accordion.Header>
-                <div style={{ width: '400px',}} >
+              <Accordion.Header className="d-flex flex-wrap align-items-center justify-content-between" >
+                <div className="flex-grow-1 mb-3 mb-lg-0" >
                   {" "}
                   <h5 className="fw-semibold">CHOFER {driver.nombre} </h5>
                 </div>
-                <div className="d-flex justify-content-center justify-content-lg-end"
-                 style={{ left: '600px',}}>
+                <div >
                   <span
-                  style={{ position: 'relative', left: '1000px',}}
                     onClick={() => HandleModificar(driver)}
-                    className="btn btn-secondary m-3  "
+                    className="btn btn-secondary m-3"
                   >
                     Modificar
                   </span>

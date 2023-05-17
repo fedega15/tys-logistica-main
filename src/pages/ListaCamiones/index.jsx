@@ -95,16 +95,15 @@ const ListaCamiones1 = () => {
       <Accordion defaultActiveKey={["0"]} alwaysOpen>
         {results.map((vehicle, index) => (
           <Accordion.Item eventKey={index} key={index}>
-            <Accordion.Header>
-              <div style={{ width: '400px',}}>
+            <Accordion.Header className="d-flex flex-wrap align-items-center justify-content-between" >
+              <div className="flex-grow-1 mb-3 mb-lg-0">
                 {" "}
-                <h5 className="font-italic text-dark">
+                <h5 className="fw-semibold text-dark">
                   VEHICULO {vehicle.id}{" "}
                 </h5>
               </div>
-              <div className="d-flex justify-content-center justify-content-lg-end">
+              <div >
                 <span
-               style={{ position: 'relative', left: '1000px',}}
                   onClick={() => HandleModificar(vehicle)}
                   className="btn btn-secondary m-3  "
                 >
